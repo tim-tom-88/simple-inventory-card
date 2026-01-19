@@ -161,7 +161,4 @@ export interface InventoryItem {
 export interface InventoryConfig extends LovelaceCardConfig {
   type: string;
   entity: string;
-  item_onclick?: {
-    service: string;
-  };
 }
