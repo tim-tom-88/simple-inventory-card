@@ -23,7 +23,6 @@ vi.mock('../../src/services/multiSelect.ts', () => ({
 
 describe('EventHandler', () => {
   let eventHandler: EventHandler;
-  let mockCard: any;
   let mockConfig: InventoryConfig;
   let mockFilters: any;
   let mockHass: HomeAssistant;
@@ -117,13 +116,7 @@ describe('EventHandler', () => {
     globalThis.confirm = vi.fn();
     globalThis.alert = vi.fn();
 
-    let mockCard: any;
-    mockCard = {
-      dispatchEvent: vi.fn(),
-    };
-
     eventHandler = new EventHandler(
-      mockCard,
       mockRenderRoot,
       mockServices,
       mockModals,
@@ -817,73 +810,6 @@ describe('EventHandler', () => {
         expect(globalThis.alert).toHaveBeenCalledWith('Error clearing filters. Please try again.');
         consoleErrorSpy.mockRestore();
       });
-    });
-
-  describe('handleClick item row', () => {
-    let mockItemRow: HTMLElement;
-    let mockEvent: Event;
-
-    beforeEach(() => {
-        mockItemRow = document.createElement('div');
-        mockItemRow.classList.add('item-row');
-        mockItemRow.setAttribute('data-name', 'Test Item');
-
-        const mockTarget = mockItemRow;
-
-        mockEvent = {
-            target: mockTarget,
-            preventDefault: vi.fn(),
-            stopPropagation: vi.fn(),
-            composedPath: () => [mockTarget],
-        } as unknown as Event;
-
-        Object.defineProperty(mockTarget, 'closest', {
-            value: vi.fn().mockImplementation(selector => {
-                if (selector === '.item-row') {
-                    return mockItemRow;
-                }
-                return null;
-            }),
-            writable: true,
-        });
-    });
-
-    it('should dispatch event on item row click', async () => {
-        await eventHandler['handleClick'](mockEvent);
-
-        expect(eventHandler['card'].dispatchEvent).toHaveBeenCalled();
-        const event = eventHandler['card'].dispatchEvent.mock.calls[0][0];
-        expect(event.type).toBe('simple-inventory-card-item-click');
-        expect(event.detail.item).toEqual(mockInventoryItems[0]);
-    });
-
-    it('should not dispatch event if a button inside the row is clicked', async () => {
-        const button = document.createElement('button');
-        mockItemRow.appendChild(button);
-
-        const buttonEvent = {
-            target: button,
-            preventDefault: vi.fn(),
-            stopPropagation: vi.fn(),
-            composedPath: () => [button, mockItemRow],
-        } as unknown as Event;
-
-        Object.defineProperty(button, 'closest', {
-            value: vi.fn().mockImplementation(selector => {
-                if (selector === '.item-row') {
-                    return mockItemRow;
-                }
-                if (selector === 'button') {
-                    return button;
-                }
-                return null;
-            }),
-            writable: true,
-        });
-
-        await eventHandler['handleClick'](buttonEvent);
-
-        expect(eventHandler['card'].dispatchEvent).not.toHaveBeenCalled();
     });
   });
 });

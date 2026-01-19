@@ -1,4 +1,3 @@
-import { SimpleInventoryCard } from '@/components/simpleInventoryCard';
 import { Services } from './services';
 import { Modals } from './modals';
 import { Filters } from './filters';
@@ -27,15 +26,7 @@ export class LifecycleManager {
     this.renderRoot = renderRoot;
   }
 
-  import { SimpleInventoryCard } from '@/components/simpleInventoryCard';
-
-// ... (imports)
-
-export class LifecycleManager {
-  // ... (properties)
-
   initialize(
-    card: SimpleInventoryCard,
     hass: HomeAssistant,
     config: InventoryConfig,
     renderCallback: () => void,
@@ -64,7 +55,6 @@ export class LifecycleManager {
       const modals = new Modals(this.renderRoot, services, getInventoryId, refreshCallback);
 
       const eventHandler = new EventHandler(
-        card,
         this.renderRoot,
         services,
         modals,
@@ -93,9 +83,6 @@ export class LifecycleManager {
       return undefined;
     }
   }
-  // ... (rest of the class)
-}
-
 
   updateDependencies(hass: HomeAssistant, config: InventoryConfig): void {
     if (this.services && this.isInitialized) {

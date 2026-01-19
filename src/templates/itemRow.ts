@@ -82,7 +82,7 @@ export function createItemRowTemplate(
   };
 
   return `
-    <div class="item-row ${item.quantity === 0 ? 'zero-quantity' : ''} ${item.auto_add_enabled ? 'auto-add-enabled' : ''}" data-name="${item.name}">
+    <div class="item-row ${item.quantity === 0 ? 'zero-quantity' : ''} ${item.auto_add_enabled ? 'auto-add-enabled' : ''}">
       <div class="item-header">
         <span class="item-name">${item.name}</span>
         ${renderLocationAndCategory()}

@@ -104,8 +104,7 @@ class SimpleInventoryCard extends LitElement {
     }
 
     if (!this.lifecycleManager.isReady()) {
-            const services = this.lifecycleManager.initialize(
-        this,
+      const services = this.lifecycleManager.initialize(
         this._hass,
         this._config,
         () => this.render(),

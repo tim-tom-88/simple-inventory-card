@@ -66,11 +66,6 @@ describe('createItemRowTemplate', () => {
       expect(result).toContain('class="item-name"');
     });
 
-    it('should have a data-name attribute on the root element', () => {
-      const result = createItemRowTemplate(baseItem, mockTodoLists, mockTranslations);
-      expect(result).toContain(`<div class="item-row " data-name="${baseItem.name}">`);
-    });
-
     it('should include item name', () => {
       const result = createItemRowTemplate(baseItem, mockTodoLists, mockTranslations);
 
