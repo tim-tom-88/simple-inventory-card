@@ -24,7 +24,17 @@ export class EventHandler {
 
   private eventListenersSetup = false;
 
+  import { SimpleInventoryCard } from '@/components/simpleInventoryCard';
+
+// ... (imports)
+
+export class EventHandler {
+  private card: SimpleInventoryCard;
+  private renderRoot: ShadowRoot;
+  // ... (other properties)
+
   constructor(
+    card: SimpleInventoryCard,
     renderRoot: ShadowRoot,
     services: Services,
     modals: Modals,
@@ -36,6 +46,7 @@ export class EventHandler {
     private getFreshState: () => { hass: HomeAssistant; config: InventoryConfig },
     translations: TranslationData,
   ) {
+    this.card = card;
     this.renderRoot = renderRoot;
     this.services = services;
     this.modals = modals;
@@ -46,6 +57,59 @@ export class EventHandler {
     this.updateItemsCallback = updateItemsCallback;
     this.translations = translations;
   }
+
+  // ... (other methods)
+
+  private async handleClick(event: Event): Promise<void> {
+    const target = event.target as HTMLElement;
+    if (target.tagName === 'BUTTON' && target.hasAttribute('data-processing')) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
+    // Handle item row click
+    const itemRow = target.closest('.item-row');
+    if (itemRow && itemRow.hasAttribute('data-name')) {
+      // Check if the click was on a button within the row
+      if (target.closest('button')) {
+        return; // Let other handlers manage button clicks
+      }
+
+      const itemName = itemRow.getAttribute('data-name');
+      if (itemName) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const state = this.hass.states[this.config.entity];
+        const allItems = Utilities.validateInventoryItems(state.attributes?.items || []);
+        const item = allItems.find(i => i.name === itemName);
+
+        if (item) {
+          const itemClickEvent = new CustomEvent('simple-inventory-card-item-click', {
+            bubbles: true,
+            composed: true,
+            detail: { item },
+          });
+          this.card.dispatchEvent(itemClickEvent);
+        }
+        return;
+      }
+    }
+    
+    if (target.dataset.action && target.dataset.name) {
+      event.preventDefault();
+      event.stopPropagation();
+      await this.handleItemAction(target, target.dataset.action, target.dataset.name);
+      return;
+    }
+
+    // ... (rest of the method)
+  }
+  
+  // ... (rest of the class)
+}
+
 
   setupEventListeners(): void {
     if (this.eventListenersSetup) {
@@ -89,12 +153,57 @@ export class EventHandler {
     this.hass = hass;
   }
 
+  import { SimpleInventoryCard } from '@/components/simpleInventoryCard';
+import { ELEMENTS, ACTIONS, DEFAULTS, CSS_CLASSES } from '../utils/constants';
+// ... (rest of imports)
+
+export class EventHandler {
+  private card: SimpleInventoryCard;
+  // ... (other properties)
+
+  constructor(
+    card: SimpleInventoryCard,
+    renderRoot: ShadowRoot,
+    // ... (rest of constructor params)
+  ) {
+    this.card = card;
+    // ... (rest of constructor)
+  }
+
+  // ... (other methods)
+
   private async handleClick(event: Event): Promise<void> {
     const target = event.target as HTMLElement;
     if (target.tagName === 'BUTTON' && target.hasAttribute('data-processing')) {
       event.preventDefault();
       event.stopPropagation();
       return;
+    }
+
+    const itemRow = target.closest('.item-row');
+    if (itemRow && itemRow.hasAttribute('data-name')) {
+      if (target.closest('button')) {
+        // If a button inside the row was clicked, let other handlers deal with it.
+      } else {
+        const itemName = itemRow.getAttribute('data-name');
+        if (itemName) {
+          event.preventDefault();
+          event.stopPropagation();
+          const state = this.hass.states[this.config.entity];
+          const allItems = Utilities.validateInventoryItems(state.attributes?.items || []);
+          const item = allItems.find(i => i.name === itemName);
+
+          if (item) {
+            const itemClickEvent = new CustomEvent('simple-inventory-card-item-click', {
+              bubbles: true,
+              composed: true,
+              detail: { item },
+            });
+            this.card.dispatchEvent(itemClickEvent);
+          }
+          return;
+        }
+      }
     }
 
     if (target.dataset.action && target.dataset.name) {
@@ -104,69 +213,12 @@ export class EventHandler {
       return;
     }
 
-    // Handle modal clicks first (let modals handle their own logic)
-    if (this.modals.handleModalClick(event as MouseEvent)) {
-      return; // Don't prevent default - let modals handle it
-    }
-
-    const buttonId = target.id;
-    if (buttonId && target.tagName === 'BUTTON') {
-      switch (buttonId) {
-        case ELEMENTS.OPEN_ADD_MODAL: {
-          event.preventDefault();
-          event.stopPropagation();
-          const locations = this.getUniqueLocations();
-          const categories = this.getUniqueCategories();
-          this.modals.openAddModal(this.translations, locations, categories);
-          break;
-        }
-        case ELEMENTS.ADD_ITEM_BTN: {
-          event.preventDefault();
-          event.stopPropagation();
-          await this.handleAddItem();
-          break;
-        }
-        case ELEMENTS.ADVANCED_SEARCH_TOGGLE: {
-          event.preventDefault();
-          event.stopPropagation();
-          this.toggleAdvancedFilters();
-          break;
-        }
-        case ELEMENTS.CLEAR_FILTERS: {
-          event.preventDefault();
-          event.stopPropagation();
-          this.clearFilters();
-          break;
-        }
-        default: {
-          return;
-        }
-      }
-      return;
-    }
-
-    if (target.tagName === 'BUTTON') {
-      if (target.classList.contains(CSS_CLASSES.SAVE_BTN)) {
-        event.preventDefault();
-        event.stopPropagation();
-        if (target.closest(`#${ELEMENTS.EDIT_MODAL}`)) {
-          await this.handleSaveEdits();
-        }
-        return;
-      }
-
-      if (target.classList.contains(CSS_CLASSES.CANCEL_BTN)) {
-        event.preventDefault();
-        event.stopPropagation();
-        if (target.closest(`#${ELEMENTS.ADD_MODAL}`)) {
-          this.modals.closeAddModal();
-        } else if (target.closest(`#${ELEMENTS.EDIT_MODAL}`)) {
-          this.modals.closeEditModal();
-        }
-        return;
-      }
-    }
+    // ... (rest of handleClick)
   }
+
+  // ... (rest of class)
+}
+
 
   private handleChange(event: Event): void {
     const target = event.target as HTMLElement;
