@@ -63,8 +63,8 @@ const a = (t, ...e) => {
     is: l,
     defineProperty: d,
     getOwnPropertyDescriptor: c,
-    getOwnPropertyNames: p,
-    getOwnPropertySymbols: h,
+    getOwnPropertyNames: h,
+    getOwnPropertySymbols: p,
     getPrototypeOf: u,
   } = Object,
   m = globalThis,
@@ -161,7 +161,7 @@ let $ = class extends HTMLElement {
     if (this.hasOwnProperty(v('finalized'))) return;
     if (((this.finalized = !0), this._$Ei(), this.hasOwnProperty(v('properties')))) {
       const t = this.properties,
-        e = [...p(t), ...h(t)];
+        e = [...h(t), ...p(t)];
       for (const i of e) this.createProperty(i, t[i]);
     }
     const t = this[Symbol.metadata];
@@ -379,8 +379,8 @@ const w = globalThis,
   S = '?' + k,
   z = `<${S}>`,
   C = document,
-  D = () => C.createComment(''),
-  L = (t) => null === t || ('object' != typeof t && 'function' != typeof t),
+  L = () => C.createComment(''),
+  D = (t) => null === t || ('object' != typeof t && 'function' != typeof t),
   R = Array.isArray,
   M = '[ \t\n\f\r]',
   N = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,
@@ -390,17 +390,17 @@ const w = globalThis,
   U = /'/g,
   P = /"/g,
   H = /^(?:script|style|textarea|title)$/i,
-  B = ((W = 1), (t, ...e) => ({ _$litType$: W, strings: t, values: e })),
+  B = ((J = 1), (t, ...e) => ({ _$litType$: J, strings: t, values: e })),
   j = /* @__PURE__ */ Symbol.for('lit-noChange'),
-  V = /* @__PURE__ */ Symbol.for('lit-nothing'),
-  Y = /* @__PURE__ */ new WeakMap(),
+  Y = /* @__PURE__ */ Symbol.for('lit-nothing'),
+  V = /* @__PURE__ */ new WeakMap(),
   Q = C.createTreeWalker(C, 129);
-var W;
-function X(t, e) {
+var J;
+function W(t, e) {
   if (!R(t) || !t.hasOwnProperty('raw')) throw Error('invalid template strings array');
   return void 0 !== I ? I.createHTML(e) : e;
 }
-class J {
+class X {
   constructor({ strings: t, _$litType$: e }, i) {
     let o;
     this.parts = [];
@@ -443,18 +443,18 @@ class J {
                     : a === O || a === q
                       ? (a = N)
                       : ((a = F), (r = void 0)));
-          const p = a === F && t[s + 1].startsWith('/>') ? ' ' : '';
+          const h = a === F && t[s + 1].startsWith('/>') ? ' ' : '';
           n +=
             a === N
               ? e + z
               : d >= 0
-                ? (o.push(i), e.slice(0, d) + T + e.slice(d) + k + p)
-                : e + k + (-2 === d ? s : p);
+                ? (o.push(i), e.slice(0, d) + T + e.slice(d) + k + h)
+                : e + k + (-2 === d ? s : h);
         }
-        return [X(t, n + (t[i] || '<?>') + (2 === e ? '</svg>' : 3 === e ? '</math>' : '')), o];
+        return [W(t, n + (t[i] || '<?>') + (2 === e ? '</svg>' : 3 === e ? '</math>' : '')), o];
       })(t, e);
     if (
-      ((this.el = J.createElement(l, i)), (Q.currentNode = this.el.content), 2 === e || 3 === e)
+      ((this.el = X.createElement(l, i)), (Q.currentNode = this.el.content), 2 === e || 3 === e)
     ) {
       const t = this.el.content.firstChild;
       t.replaceWith(...t.childNodes);
@@ -482,8 +482,8 @@ class J {
           if (e > 0) {
             o.textContent = A ? A.emptyScript : '';
             for (let i = 0; i < e; i++)
-              (o.append(t[i], D()), Q.nextNode(), s.push({ type: 2, index: ++r }));
-            o.append(t[e], D());
+              (o.append(t[i], L()), Q.nextNode(), s.push({ type: 2, index: ++r }));
+            o.append(t[e], L());
           }
         }
       } else if (8 === o.nodeType)
@@ -504,7 +504,7 @@ class J {
 function Z(t, e, i = t, o) {
   if (e === j) return e;
   let r = void 0 !== o ? i._$Co?.[o] : i._$Cl;
-  const n = L(e) ? void 0 : e._$litDirective$;
+  const n = D(e) ? void 0 : e._$litDirective$;
   return (
     r?.constructor !== n &&
       (r?._$AO?.(!1),
@@ -564,7 +564,7 @@ class K {
   }
   constructor(t, e, i, o) {
     ((this.type = 2),
-      (this._$AH = V),
+      (this._$AH = Y),
       (this._$AN = void 0),
       (this._$AA = t),
       (this._$AB = e),
@@ -585,9 +585,9 @@ class K {
   }
   _$AI(t, e = this) {
     ((t = Z(this, t, e)),
-      L(t)
-        ? t === V || null == t || '' === t
-          ? (this._$AH !== V && this._$AR(), (this._$AH = V))
+      D(t)
+        ? t === Y || null == t || '' === t
+          ? (this._$AH !== Y && this._$AR(), (this._$AH = Y))
           : t !== this._$AH && t !== j && this._(t)
         : void 0 !== t._$litType$
           ? this.$(t)
@@ -604,7 +604,7 @@ class K {
     this._$AH !== t && (this._$AR(), (this._$AH = this.O(t)));
   }
   _(t) {
-    (this._$AH !== V && L(this._$AH)
+    (this._$AH !== Y && D(this._$AH)
       ? (this._$AA.nextSibling.data = t)
       : this.T(C.createTextNode(t)),
       (this._$AH = t));
@@ -614,7 +614,7 @@ class K {
       o =
         'number' == typeof i
           ? this._$AC(t)
-          : (void 0 === i.el && (i.el = J.createElement(X(i.h, i.h[0]), this.options)), i);
+          : (void 0 === i.el && (i.el = X.createElement(W(i.h, i.h[0]), this.options)), i);
     if (this._$AH?._$AD === o) this._$AH.p(e);
     else {
       const t = new G(o, this),
@@ -623,8 +623,8 @@ class K {
     }
   }
   _$AC(t) {
-    let e = Y.get(t.strings);
-    return (void 0 === e && Y.set(t.strings, (e = new J(t))), e);
+    let e = V.get(t.strings);
+    return (void 0 === e && V.set(t.strings, (e = new X(t))), e);
   }
   k(t) {
     R(this._$AH) || ((this._$AH = []), this._$AR());
@@ -633,7 +633,7 @@ class K {
       o = 0;
     for (const r of t)
       (o === e.length
-        ? e.push((i = new K(this.O(D()), this.O(D()), this, this.options)))
+        ? e.push((i = new K(this.O(L()), this.O(L()), this, this.options)))
         : (i = e[o]),
         i._$AI(r),
         o++);
@@ -658,7 +658,7 @@ class tt {
   }
   constructor(t, e, i, o, r) {
     ((this.type = 1),
-      (this._$AH = V),
+      (this._$AH = Y),
       (this._$AN = void 0),
       (this.element = t),
       (this.name = e),
@@ -666,27 +666,27 @@ class tt {
       (this.options = r),
       i.length > 2 || '' !== i[0] || '' !== i[1]
         ? ((this._$AH = Array(i.length - 1).fill(new String())), (this.strings = i))
-        : (this._$AH = V));
+        : (this._$AH = Y));
   }
   _$AI(t, e = this, i, o) {
     const r = this.strings;
     let n = !1;
     if (void 0 === r)
-      ((t = Z(this, t, e, 0)), (n = !L(t) || (t !== this._$AH && t !== j)), n && (this._$AH = t));
+      ((t = Z(this, t, e, 0)), (n = !D(t) || (t !== this._$AH && t !== j)), n && (this._$AH = t));
     else {
       const o = t;
       let a, s;
       for (t = r[0], a = 0; a < r.length - 1; a++)
         ((s = Z(this, o[i + a], e, a)),
           s === j && (s = this._$AH[a]),
-          (n ||= !L(s) || s !== this._$AH[a]),
-          s === V ? (t = V) : t !== V && (t += (s ?? '') + r[a + 1]),
+          (n ||= !D(s) || s !== this._$AH[a]),
+          s === Y ? (t = Y) : t !== Y && (t += (s ?? '') + r[a + 1]),
           (this._$AH[a] = s));
     }
     n && !o && this.j(t);
   }
   j(t) {
-    t === V
+    t === Y
       ? this.element.removeAttribute(this.name)
       : this.element.setAttribute(this.name, t ?? '');
   }
@@ -696,7 +696,7 @@ class et extends tt {
     (super(...arguments), (this.type = 3));
   }
   j(t) {
-    this.element[this.name] = t === V ? void 0 : t;
+    this.element[this.name] = t === Y ? void 0 : t;
   }
 }
 class it extends tt {
@@ -704,7 +704,7 @@ class it extends tt {
     (super(...arguments), (this.type = 4));
   }
   j(t) {
-    this.element.toggleAttribute(this.name, !!t && t !== V);
+    this.element.toggleAttribute(this.name, !!t && t !== Y);
   }
 }
 class ot extends tt {
@@ -712,14 +712,14 @@ class ot extends tt {
     (super(t, e, i, o, r), (this.type = 5));
   }
   _$AI(t, e = this) {
-    if ((t = Z(this, t, e, 0) ?? V) === j) return;
+    if ((t = Z(this, t, e, 0) ?? Y) === j) return;
     const i = this._$AH,
       o =
-        (t === V && i !== V) ||
+        (t === Y && i !== Y) ||
         t.capture !== i.capture ||
         t.once !== i.once ||
         t.passive !== i.passive,
-      r = t !== V && (i === V || o);
+      r = t !== Y && (i === Y || o);
     (o && this.element.removeEventListener(this.name, this, i),
       r && this.element.addEventListener(this.name, this, t),
       (this._$AH = t));
@@ -746,7 +746,7 @@ class rt {
   }
 }
 const nt = w.litHtmlPolyfillSupport;
-(nt?.(J, K), (w.litHtmlVersions ??= []).push('3.3.2'));
+(nt?.(X, K), (w.litHtmlVersions ??= []).push('3.3.2'));
 const at = globalThis;
 class st extends $ {
   constructor() {
@@ -765,7 +765,7 @@ class st extends $ {
         let r = o._$litPart$;
         if (void 0 === r) {
           const t = i?.renderBefore ?? null;
-          o._$litPart$ = r = new K(e.insertBefore(D(), t), t, void 0, i ?? {});
+          o._$litPart$ = r = new K(e.insertBefore(L(), t), t, void 0, i ?? {});
         }
         return (r._$AI(t), r);
       })(e, this.renderRoot, this.renderOptions)));
@@ -785,8 +785,8 @@ const lt = at.litElementPolyfillSupport;
 (lt?.({ LitElement: st }), (at.litElementVersions ??= []).push('4.2.2'));
 const dt = 'simple_inventory',
   ct = 'add_item',
-  pt = 'decrement_item',
-  ht = 'increment_item',
+  ht = 'decrement_item',
+  pt = 'increment_item',
   ut = 'remove_item',
   mt = 'update_item',
   gt = 'amount',
@@ -806,8 +806,8 @@ const dt = 'simple_inventory',
   St = 'unit',
   zt = 'add-modal',
   Ct = 'edit-modal',
-  Dt = 'auto-add-enabled',
-  Lt = 'auto-add-id-to-description-enabled',
+  Lt = 'auto-add-enabled',
+  Dt = 'auto-add-id-to-description-enabled',
   Rt = 'auto-add-to-list-quantity',
   Mt = 'category',
   Nt = 'description',
@@ -819,12 +819,12 @@ const dt = 'simple_inventory',
   Ht = 'todo-list',
   Bt = 'unit',
   jt = 'add-item-btn',
-  Vt = 'open-add-modal',
-  Yt = 'active-filters',
+  Yt = 'open-add-modal',
+  Vt = 'active-filters',
   Qt = 'active-filters-list',
-  Wt = 'advanced-search-toggle',
-  Xt = 'clear-filters',
-  Jt = 'filter-category',
+  Jt = 'advanced-search-toggle',
+  Wt = 'clear-filters',
+  Xt = 'filter-category',
   Zt = 'filter-expiry',
   Gt = 'filter-location',
   Kt = 'filter-quantity',
@@ -839,8 +839,8 @@ const dt = 'simple_inventory',
   le = 'modal-content',
   de = 'save-btn',
   ce = 'show',
-  pe = 'close_add_modal',
-  he = 'decrement',
+  he = 'close_add_modal',
+  pe = 'decrement',
   ue = 'increment',
   me = 'item_click',
   ge = 'open_edit',
@@ -1149,7 +1149,7 @@ const dt = 'simple_inventory',
     createEntityOptions: (t, e) =>
       e.map((e) => ({ value: e, label: t.states[e]?.attributes?.friendly_name || e })),
   };
-class De {
+class Le {
   static _cache = /* @__PURE__ */ new Map();
   static _loadingPromises = /* @__PURE__ */ new Map();
   static _cardName = 'simple-inventory-card';
@@ -1202,7 +1202,7 @@ class De {
     );
   }
 }
-const Le = a`
+const De = a`
   .card-config {
     padding: 16px;
   }
@@ -1231,7 +1231,8 @@ const Le = a`
   }
 
   ha-textfield,
-  ha-textarea {
+  ha-textarea,
+  ha-yaml-editor {
     width: 100%;
   }
 
@@ -1294,7 +1295,7 @@ class Re extends st {
   async _loadTranslations() {
     const t = this.hass?.language || this.hass?.selectedLanguage || 'en';
     try {
-      ((this._translations = await De.loadTranslations(t)), this.requestUpdate());
+      ((this._translations = await Le.loadTranslations(t)), this.requestUpdate());
     } catch (e) {
       (console.warn('Failed to load translations:', e), (this._translations = {}));
     }
@@ -1308,7 +1309,7 @@ class Re extends st {
   render() {
     if (!this.hass || !this._config)
       return B`<div>
-        ${De.localize(this._translations, 'common.loading', void 0, 'Loading...')}
+        ${Le.localize(this._translations, 'common.loading', void 0, 'Loading...')}
       </div>`;
     const t = Ce.findInventoryEntities(this.hass),
       e = Ce.createEntityOptions(this.hass, t);
@@ -1333,7 +1334,7 @@ class Re extends st {
         <div class="col">
           <ha-combo-box
             .hass=${t}
-            .label=${De.localize(r, 'config.inventory_entity_required', void 0, 'Inventory Entity (Required)')}
+            .label=${Le.localize(r, 'config.inventory_entity_required', void 0, 'Inventory Entity (Required)')}
             .items=${e}
             .value=${i}
             @value-changed=${o}
@@ -1347,43 +1348,54 @@ class Re extends st {
           ((i = this._config?.item_click_action?.service || ''),
           (o = this._stringifyJson(this._config?.item_click_action?.target)),
           (r = this._stringifyJson(this._config?.item_click_action?.data)),
-          (n = this._actionValueChanged.bind(this)),
-          (a = this._translations),
+          (n = this._stringifyYaml(this._config?.item_click_action)),
+          (a = this._actionValueChanged.bind(this)),
+          (s = this._actionYamlChanged.bind(this)),
+          (l = this._translations),
           B`
     <div class="option">
       <div class="section-title">
-        ${De.localize(a, 'config.item_click_action', void 0, 'Item click action (optional)')}
+        ${Le.localize(l, 'config.item_click_action', void 0, 'Item click action (optional)')}
       </div>
       <div class="row">
         <div class="col">
           <ha-textfield
-            .label=${De.localize(a, 'config.item_click_service', void 0, 'Service (domain.service)')}
+            .label=${Le.localize(l, 'config.item_click_service', void 0, 'Service (domain.service)')}
             .value=${i}
             data-field="item_click_service"
-            @change=${n}
+            @change=${a}
           ></ha-textfield>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <ha-textarea
-            .label=${De.localize(a, 'config.item_click_target', void 0, 'Target JSON (optional)')}
+            .label=${Le.localize(l, 'config.item_click_target', void 0, 'Target JSON (optional)')}
             .value=${o}
             placeholder='{"entity_id":"automation.example"}'
             data-field="item_click_target"
-            @change=${n}
+            @change=${a}
           ></ha-textarea>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <ha-textarea
-            .label=${De.localize(a, 'config.item_click_data', void 0, 'Data JSON (optional, supports {{location}}, {{name}}, {{quantity}})')}
+            .label=${Le.localize(l, 'config.item_click_data', void 0, 'Data JSON (optional, supports {{location}}, {{name}}, {{quantity}})')}
             .value=${r}
             placeholder='{"variables":{"location":"{{location}}","name":"{{name}}"}}'
             data-field="item_click_data"
-            @change=${n}
+            @change=${a}
           ></ha-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ha-yaml-editor
+            .label=${Le.localize(l, 'config.item_click_yaml', void 0, 'Item click action YAML (optional)')}
+            .value=${n}
+            @value-changed=${s}
+          ></ha-yaml-editor>
         </div>
       </div>
     </div>
@@ -1398,7 +1410,7 @@ class Re extends st {
                 return B`
     <div class="entity-info">
       <div class="info-header">
-        ${De.localize(i, 'config.selected_inventory', void 0, 'Selected Inventory:')}
+        ${Le.localize(i, 'config.selected_inventory', void 0, 'Selected Inventory:')}
       </div>
       <div class="info-content">
         <strong>${r}</strong>
@@ -1406,7 +1418,7 @@ class Re extends st {
         <small>${e}</small>
         <br />
         <small>
-          ${De.localize(i, 'config.items_count', void 0, 'Items')}:
+          ${Le.localize(i, 'config.items_count', void 0, 'Items')}:
           ${n}
         </small>
       </div>
@@ -1418,7 +1430,7 @@ class Re extends st {
     <div class="no-entity">
       <ha-icon icon="mdi:information-outline"></ha-icon>
       <div>
-        ${De.localize(t, 'config.select_entity_message', void 0, 'Please select an inventory entity above')}
+        ${Le.localize(t, 'config.select_entity_message', void 0, 'Please select an inventory entity above')}
       </div>
     </div>
   `;
@@ -1427,7 +1439,7 @@ class Re extends st {
       </div>
     `
     );
-    var i, o, r, n, a;
+    var i, o, r, n, a, s, l;
   }
   _valueChanged(t) {
     if (!this._config) return;
@@ -1476,6 +1488,23 @@ class Re extends st {
         new CustomEvent('config-changed', { detail: { config: a }, bubbles: !0, composed: !0 }),
       ));
   }
+  _actionYamlChanged(t) {
+    if (!this._config) return;
+    const e = t.detail?.value || (t.target?.value ?? ''),
+      i = this._parseYamlOrJsonInput(e);
+    if (void 0 === i) return;
+    const o = {
+      ...this._config,
+      ...(i ? { item_click_action: i } : {}),
+      type: this._config.type || 'custom:simple-inventory-card',
+    };
+    (!i && this._config.item_click_action && delete o.item_click_action,
+      (this._config = o),
+      this.requestUpdate(),
+      this.dispatchEvent(
+        new CustomEvent('config-changed', { detail: { config: o }, bubbles: !0, composed: !0 }),
+      ));
+  }
   _parseJsonInput(t) {
     const e = t.trim();
     if (!e) return null;
@@ -1488,11 +1517,38 @@ class Re extends st {
       );
     }
   }
+  _parseYamlOrJsonInput(t) {
+    const e = t.trim();
+    if (!e) return null;
+    const i = globalThis.jsyaml;
+    if (i?.load)
+      try {
+        const t = i.load(e);
+        return t && 'object' == typeof t ? t : null;
+      } catch (o) {
+        return (
+          console.warn('Invalid YAML in item click action field:', o),
+          void alert('Invalid YAML. Please correct it before saving.')
+        );
+      }
+    return this._parseJsonInput(t);
+  }
   _stringifyJson(t) {
     return t ? JSON.stringify(t, null, 2) : '';
   }
+  _stringifyYaml(t) {
+    if (!t) return '';
+    const e = globalThis.jsyaml;
+    if (e?.dump)
+      try {
+        return e.dump(t);
+      } catch (i) {
+        console.warn('Failed to stringify YAML for item click action:', i);
+      }
+    return this._stringifyJson(t);
+  }
   static get styles() {
-    return Le;
+    return De;
   }
 }
 class Me {
@@ -1543,7 +1599,7 @@ class Me {
   }
   async incrementItem(t, e, i = 1) {
     try {
-      return (await this.hass.callService(dt, ht, { [wt]: t, [At]: e, [gt]: i }), { success: !0 });
+      return (await this.hass.callService(dt, pt, { [wt]: t, [At]: e, [gt]: i }), { success: !0 });
     } catch (o) {
       return (
         console.error('Error incrementing item:', o),
@@ -1553,7 +1609,7 @@ class Me {
   }
   async decrementItem(t, e, i = 1) {
     try {
-      return (await this.hass.callService(dt, pt, { [wt]: t, [At]: e, [gt]: i }), { success: !0 });
+      return (await this.hass.callService(dt, ht, { [wt]: t, [At]: e, [gt]: i }), { success: !0 });
     } catch (o) {
       return (
         console.error('Error decrementing item:', o),
@@ -1659,8 +1715,8 @@ class Ne {
   }
   getRawAddModalData() {
     return {
-      autoAddEnabled: this.getInputChecked(`add-${Dt}`),
-      autoAddIdToDescriptionEnabled: this.getInputChecked(`add-${Lt}`),
+      autoAddEnabled: this.getInputChecked(`add-${Lt}`),
+      autoAddIdToDescriptionEnabled: this.getInputChecked(`add-${Dt}`),
       autoAddToListQuantity: this.getInputValue(`add-${Rt}`),
       category: this.getInputValue(`add-${Mt}`),
       description: this.getInputValue(`add-${Nt}`),
@@ -1675,8 +1731,8 @@ class Ne {
   }
   getRawEditModalData() {
     return {
-      autoAddEnabled: this.getInputChecked(`edit-${Dt}`),
-      autoAddIdToDescriptionEnabled: this.getInputChecked(`edit-${Lt}`),
+      autoAddEnabled: this.getInputChecked(`edit-${Lt}`),
+      autoAddIdToDescriptionEnabled: this.getInputChecked(`edit-${Dt}`),
       autoAddToListQuantity: this.getInputValue(`edit-${Rt}`),
       category: this.getInputValue(`edit-${Mt}`),
       description: this.getInputValue(`edit-${Nt}`),
@@ -1706,8 +1762,8 @@ class Ne {
       { id: `edit-${Bt}`, value: t.unit ?? ve.UNIT },
     ];
     this.setFormValues(e);
-    const i = this.getElement(`edit-${Dt}`),
-      o = this.getElement(`edit-${Lt}`);
+    const i = this.getElement(`edit-${Lt}`),
+      o = this.getElement(`edit-${Dt}`);
     (i && (i.checked = t.auto_add_enabled ?? !1),
       o && (o.checked = t.auto_add_id_to_description_enabled ?? !1));
   }
@@ -1725,8 +1781,8 @@ class Ne {
       { id: `add-${Bt}`, value: ve.UNIT },
     ];
     this.setFormValues(t);
-    const e = this.getElement(`add-${Dt}`),
-      i = this.getElement(`add-${Lt}`);
+    const e = this.getElement(`add-${Lt}`),
+      i = this.getElement(`add-${Dt}`);
     (e && (e.checked = ve.AUTO_ADD_ENABLED),
       i && (i.checked = ve.AUTO_ADD_ID_TO_DESCRIPTION_ENABLED));
   }
@@ -1803,7 +1859,7 @@ class Oe {
         t.stopPropagation(),
         e.id === zt ? this.closeAddModal() : this.closeEditModal(),
         !0)
-      : e.dataset.action === pe || (e.classList.contains(ne) && e.closest(`#${zt}`))
+      : e.dataset.action === he || (e.classList.contains(ne) && e.closest(`#${zt}`))
         ? (t.preventDefault(), t.stopPropagation(), this.closeAddModal(), !0)
         : e.classList.contains(ne) && e.closest(`#${Ct}`)
           ? (t.preventDefault(), t.stopPropagation(), this.closeEditModal(), !0)
@@ -1831,7 +1887,7 @@ class Oe {
     if (!o || !r) return;
     if ('' !== o.value.trim())
       ((r.disabled = !1),
-        (r.placeholder = De.localize(
+        (r.placeholder = Le.localize(
           e,
           'modal.expiry_threshold_placeholder',
           void 0,
@@ -1840,7 +1896,7 @@ class Oe {
         r.value.trim() || (r.value = '0'));
     else {
       ((r.disabled = !0), (r.value = ''));
-      const t = De.localize(e, 'modal.set_expiry_first', void 0, 'Set expiry date first');
+      const t = Le.localize(e, 'modal.set_expiry_first', void 0, 'Set expiry date first');
       r.placeholder = t;
     }
   }
@@ -1936,7 +1992,7 @@ class qe {
         this.getElement(`${e}-${Ut}`),
         this.getElement(`${e}-${qt}`),
       ],
-      o = this.getElement(`${e}-${Dt}`),
+      o = this.getElement(`${e}-${Lt}`),
       r = this.getElement(`${e}-${Rt}`),
       n = this.getElement(`${e}-${Ht}`);
     for (const a of i)
@@ -2138,15 +2194,15 @@ class Ue {
 function Pe(t, e) {
   const i = [];
   if (t.searchText) {
-    const o = De.localize(e, 'active_filters.search', void 0, 'Search');
+    const o = Le.localize(e, 'active_filters.search', void 0, 'Search');
     i.push(`<span class="filter-badge search">\n        ${o}: "${t.searchText}"\n      </span>`);
   }
   const o = (t, o, r, n) => {
     if (t && t.length > 0) {
-      const a = De.localize(e, o, void 0, n),
+      const a = Le.localize(e, o, void 0, n),
         s =
           t.length > 1
-            ? `${a}: ${t.length} ${De.localize(e, 'active_filters.selected', void 0, 'selected')}`
+            ? `${a}: ${t.length} ${Le.localize(e, 'active_filters.selected', void 0, 'selected')}`
             : `${a}: ${t[0]}`;
       i.push(`<span class="filter-badge ${r}">${s}</span>`);
     }
@@ -2157,12 +2213,12 @@ function Pe(t, e) {
     o(t.quantity, 'active_filters.quantity', 'quantity', 'Quantity'),
     t.expiry && t.expiry.length > 0)
   ) {
-    const o = De.localize(e, 'active_filters.expiry', void 0, 'Expiry');
+    const o = Le.localize(e, 'active_filters.expiry', void 0, 'Expiry');
     let r;
     if (t.expiry.length > 1)
-      r = `${o}: ${t.expiry.length} ${De.localize(e, 'active_filters.selected', void 0, 'selected')}`;
+      r = `${o}: ${t.expiry.length} ${Le.localize(e, 'active_filters.selected', void 0, 'selected')}`;
     else {
-      r = `${o}: ${De.localize(e, `filters.${t.expiry[0]}`, void 0, t.expiry[0])}`;
+      r = `${o}: ${Le.localize(e, `filters.${t.expiry[0]}`, void 0, t.expiry[0])}`;
     }
     i.push(`<span class="filter-badge expiry">${r}</span>`);
   }
@@ -2302,7 +2358,7 @@ class He {
   }
   sortByLocation(t, e) {
     return t.sort((t, i) => {
-      const o = De.localize(e, 'common.no_location', void 0, 'No Location'),
+      const o = Le.localize(e, 'common.no_location', void 0, 'No Location'),
         r = (t.location ?? o).toLowerCase().trim(),
         n = (i.location ?? o).toLowerCase().trim(),
         a = r.localeCompare(n);
@@ -2311,7 +2367,7 @@ class He {
   }
   sortByCategory(t, e) {
     return t.sort((t, i) => {
-      const o = De.localize(e, 'common.uncategorized', void 0, 'Uncategorized'),
+      const o = Le.localize(e, 'common.uncategorized', void 0, 'Uncategorized'),
         r = (t.category ?? o).toLowerCase().trim(),
         n = (i.category ?? o).toLowerCase().trim(),
         a = r.localeCompare(n);
@@ -2359,23 +2415,23 @@ class He {
       i.addEventListener('input', this.boundSearchHandler));
   }
   updateFilterIndicators(t, e) {
-    const i = this.shadowRoot.getElementById(Wt);
+    const i = this.shadowRoot.getElementById(Jt);
     if (i)
       if (Ce.hasActiveFilters(t)) {
-        const o = De.localize(e, 'filters.hide_filters', void 0, 'Hide Filters'),
-          r = De.localize(e, 'filters.filters', void 0, 'Filters'),
+        const o = Le.localize(e, 'filters.hide_filters', void 0, 'Hide Filters'),
+          r = Le.localize(e, 'filters.filters', void 0, 'Filters'),
           n = t.showAdvanced ? `${o} ●` : `${r} ●`;
         ((i.textContent = n), (i.style.background = 'var(--warning-color, #ff9800)'));
       } else {
-        const o = De.localize(e, 'filters.hide_filters', void 0, 'Hide Filters'),
-          r = De.localize(e, 'filters.filters', void 0, 'Filters'),
+        const o = Le.localize(e, 'filters.hide_filters', void 0, 'Hide Filters'),
+          r = Le.localize(e, 'filters.filters', void 0, 'Filters'),
           n = t.showAdvanced ? o : r;
         ((i.textContent = n), (i.style.background = 'var(--primary-color)'));
       }
     this.updateActiveFiltersDisplay(t, e);
   }
   updateActiveFiltersDisplay(t, e) {
-    const i = this.shadowRoot.getElementById(Yt),
+    const i = this.shadowRoot.getElementById(Vt),
       o = this.shadowRoot.getElementById(Qt);
     if (i && o) {
       const r = Pe(t, e);
@@ -3558,36 +3614,36 @@ function je(t, e, i, o) {
       (t) => !(!t.expiry_date || (t.quantity ?? 0) <= 0) && Ce.isExpired(t.expiry_date),
     ).length;
   })(e);
-  return `\n      <div class="card-header">\n        <div class="header-content">\n          <h2 class="inventory-title">${Ce.sanitizeHtml(t)}</h2>\n          ${o && o.trim() ? `<p class="inventory-description">${Ce.sanitizeHtml(o)}</p>` : ''}\n        </div>\n        ${n > 0 || r > 0 ? `\n          <div class="expiry-indicators">\n            ${n > 0 ? `\n                <span class="expired-badge" title="${De.localize(i, 'header.items_expired', { count: n }, `${n} items expired`)}">\n                <ha-icon icon="mdi:calendar-remove"></ha-icon>\n                ${n}\n              </span>\n            ` : ''}\n            ${r > 0 ? `\n                <span class="expiring-badge" title="${De.localize(i, 'header.items_expiring_soon', { count: r }, `${r} items expiring soon`)}">\n                <ha-icon icon="mdi:calendar-alert"></ha-icon>\n                ${r}\n              </span>\n            ` : ''}\n          </div>\n        ` : ''}\n      </div>\n    `;
+  return `\n      <div class="card-header">\n        <div class="header-content">\n          <h2 class="inventory-title">${Ce.sanitizeHtml(t)}</h2>\n          ${o && o.trim() ? `<p class="inventory-description">${Ce.sanitizeHtml(o)}</p>` : ''}\n        </div>\n        ${n > 0 || r > 0 ? `\n          <div class="expiry-indicators">\n            ${n > 0 ? `\n                <span class="expired-badge" title="${Le.localize(i, 'header.items_expired', { count: n }, `${n} items expired`)}">\n                <ha-icon icon="mdi:calendar-remove"></ha-icon>\n                ${n}\n              </span>\n            ` : ''}\n            ${r > 0 ? `\n                <span class="expiring-badge" title="${Le.localize(i, 'header.items_expiring_soon', { count: r }, `${r} items expiring soon`)}">\n                <ha-icon icon="mdi:calendar-alert"></ha-icon>\n                ${r}\n              </span>\n            ` : ''}\n          </div>\n        ` : ''}\n      </div>\n    `;
 }
-function Ve(t) {
+function Ye(t) {
   return `\n    <div class="multi-select-container">\n      <div class="multi-select-trigger" id="${t.id}-trigger">\n        <span class="multi-select-label">\n          ${t.selected && t.selected.length > 0 ? `${t.selected.length} selected` : t.placeholder}\n        </span>\n        <span class="multi-select-arrow">▼</span>\n      </div>\n      <div class="multi-select-dropdown" id="${t.id}-dropdown" style="display: none;">\n        ${t.options.map((e) => `\n              <label class="multi-select-option">\n                <input type="checkbox" value="${e}" ${t.selected && t.selected.includes(e) ? 'checked' : ''}>\n                <span>${t.labels?.[e] || e}</span>\n              </label>\n            `).join('')}\n      </div>\n    </div>\n  `;
 }
-function Ye(t, e, i, o) {
+function Ve(t, e, i, o) {
   return `\n    ${(function (t, e) {
-    return `\n    <div class="search-row">\n      <input \n        type="text" \n        id="${te}" \n        placeholder="${De.localize(e, 'filters.search_placeholder', void 0, 'Search items...')}" \n        value="${t.searchText || ''}"\n        class="search-input ${t.searchText ? 'has-value' : ''}"\n      />\n      <button id="${Wt}" \n        class="toggle-btn ${Ce.hasActiveFilters(t) ? 'has-active-filters' : ''}">\n      ${t.showAdvanced ? De.localize(e, 'filters.hide_filters', void 0, 'Hide Filters') : De.localize(e, 'filters.filters', void 0, 'Filters')}\n      </button>\n    </div>\n`;
+    return `\n    <div class="search-row">\n      <input \n        type="text" \n        id="${te}" \n        placeholder="${Le.localize(e, 'filters.search_placeholder', void 0, 'Search items...')}" \n        value="${t.searchText || ''}"\n        class="search-input ${t.searchText ? 'has-value' : ''}"\n      />\n      <button id="${Jt}" \n        class="toggle-btn ${Ce.hasActiveFilters(t) ? 'has-active-filters' : ''}">\n      ${t.showAdvanced ? Le.localize(e, 'filters.hide_filters', void 0, 'Hide Filters') : Le.localize(e, 'filters.filters', void 0, 'Filters')}\n      </button>\n    </div>\n`;
   })(t, o)}\n    ${(function (t, e, i, o) {
     return `\n    <div id="advanced-filters" class="advanced-filters" style="display: ${t.showAdvanced ? 'block' : 'none'}">\n      ${(function (
       t,
       e,
       i,
     ) {
-      return `\n    <div class="filter-row">\n      <div class="filter-group">\n        <label>\n          ${De.localize(i, 'filters.category', void 0, 'Category')}\n        </label>\n        ${Ve({ id: Jt, options: e, selected: t.category, placeholder: De.localize(i, 'filters.all_categories', void 0, 'All Categories') })}\n      </div>\n    </div>\n`;
+      return `\n    <div class="filter-row">\n      <div class="filter-group">\n        <label>\n          ${Le.localize(i, 'filters.category', void 0, 'Category')}\n        </label>\n        ${Ye({ id: Xt, options: e, selected: t.category, placeholder: Le.localize(i, 'filters.all_categories', void 0, 'All Categories') })}\n      </div>\n    </div>\n`;
     })(t, e, o)}\n      ${(function (t, e, i) {
-      return `\n    <div class="filter-row">\n      <div class="filter-group">\n        <label>\n          ${De.localize(i, 'filters.location', void 0, 'Location')}\n        </label>\n        ${Ve({ id: Gt, options: e, selected: t.location, placeholder: De.localize(i, 'filters.all_locations', void 0, 'All Locations') })}\n      </div>\n    </div>\n`;
+      return `\n    <div class="filter-row">\n      <div class="filter-group">\n        <label>\n          ${Le.localize(i, 'filters.location', void 0, 'Location')}\n        </label>\n        ${Ye({ id: Gt, options: e, selected: t.location, placeholder: Le.localize(i, 'filters.all_locations', void 0, 'All Locations') })}\n      </div>\n    </div>\n`;
     })(t, i, o)}\n      ${(function (t, e) {
-      return `\n    <div class="filter-row">\n      <div class="filter-group">\n        <label>\n          ${De.localize(e, 'filters.quantity', void 0, 'Quantity')}\n        </label>\n        ${Ve({ id: Kt, options: ['zero', 'nonzero'], selected: t.quantity, placeholder: De.localize(e, 'filters.all_quantities', void 0, 'All Quantities'), labels: { zero: De.localize(e, 'filters.zero', void 0, 'Zero'), nonzero: De.localize(e, 'filters.non_zero', void 0, 'Non-zero') } })}\n      </div>\n    </div>\n  `;
+      return `\n    <div class="filter-row">\n      <div class="filter-group">\n        <label>\n          ${Le.localize(e, 'filters.quantity', void 0, 'Quantity')}\n        </label>\n        ${Ye({ id: Kt, options: ['zero', 'nonzero'], selected: t.quantity, placeholder: Le.localize(e, 'filters.all_quantities', void 0, 'All Quantities'), labels: { zero: Le.localize(e, 'filters.zero', void 0, 'Zero'), nonzero: Le.localize(e, 'filters.non_zero', void 0, 'Non-zero') } })}\n      </div>\n    </div>\n  `;
     })(t, o)}\n      ${(function (t, e) {
-      return `\n    <div class="filter-row">\n      <div class="filter-group">\n        <label>\n          ${De.localize(e, 'filters.expiry', void 0, 'Expiry')}\n        </label>\n        ${Ve({ id: Zt, options: ['none', 'expired', 'soon', 'future'], selected: t.expiry, placeholder: De.localize(e, 'filters.all_items', void 0, 'All Items'), labels: { none: De.localize(e, 'filters.no_expiry', void 0, 'No Expiry'), expired: De.localize(e, 'filters.expired', void 0, 'Expired'), soon: De.localize(e, 'filters.expiring_soon', void 0, 'Expiring Soon'), future: De.localize(e, 'filters.future', void 0, 'Future') } })}\n      </div>\n    </div>\n  `;
+      return `\n    <div class="filter-row">\n      <div class="filter-group">\n        <label>\n          ${Le.localize(e, 'filters.expiry', void 0, 'Expiry')}\n        </label>\n        ${Ye({ id: Zt, options: ['none', 'expired', 'soon', 'future'], selected: t.expiry, placeholder: Le.localize(e, 'filters.all_items', void 0, 'All Items'), labels: { none: Le.localize(e, 'filters.no_expiry', void 0, 'No Expiry'), expired: Le.localize(e, 'filters.expired', void 0, 'Expired'), soon: Le.localize(e, 'filters.expiring_soon', void 0, 'Expiring Soon'), future: Le.localize(e, 'filters.future', void 0, 'Future') } })}\n      </div>\n    </div>\n  `;
     })(t, o)}\n      ${(function (t) {
-      return `\n    <div class="filter-actions">\n      <button id="${Xt}" class="clear-only-btn">\n        ${De.localize(t, 'filters.clear_all_filters', void 0, 'Clear All Filters')}\n      </button>\n    </div>\n`;
+      return `\n    <div class="filter-actions">\n      <button id="${Wt}" class="clear-only-btn">\n        ${Le.localize(t, 'filters.clear_all_filters', void 0, 'Clear All Filters')}\n      </button>\n    </div>\n`;
     })(o)}\n    </div>\n`;
   })(t, e, i, o)}\n  `;
 }
 function Qe(t) {
   return `\n    <div class="autocomplete-container">\n      <input \n        type="text" \n        id="${t.id}" \n        value="${t.value || ''}"\n        placeholder="${t.placeholder || ''}"\n        autocomplete="off"\n      />\n      <div class="autocomplete-dropdown" id="${t.id}-dropdown"></div>\n    </div>\n  `;
 }
-function We(t, e, i, o = [], r = []) {
+function Je(t, e, i, o = [], r = []) {
   const n = e.id === zt ? 'add' : 'edit';
   return `\n    <div id="${e.id}" class="modal">\n      <div class="modal-content">\n\n        ${(function (
     t,
@@ -3599,30 +3655,30 @@ function We(t, e, i, o = [], r = []) {
     t,
     e,
   ) {
-    return `\n    <div class="form-group">\n      <label for="${t}-${Ut}" class="form-label">\n        ${De.localize(e, 'modal.name_required', void 0, 'Name *')}\n      </label>\n      <input type="text" id="${t}-${Ut}" required />\n    </div> \n  `;
+    return `\n    <div class="form-group">\n      <label for="${t}-${Ut}" class="form-label">\n        ${Le.localize(e, 'modal.name_required', void 0, 'Name *')}\n      </label>\n      <input type="text" id="${t}-${Ut}" required />\n    </div> \n  `;
   })(n, i)}\n          ${(function (t, e) {
-    return `\n    <div class="form-group">\n      <label for="${t}-${Nt}" class="form-label">\n        ${De.localize(e, 'modal.description', void 0, 'Description')}\n      </label>\n      <input type="text" id="${t}-${Nt}" placeholder="${De.localize(e, 'modal.description_placeholder', void 0, 'Item description')}" />\n    </div> \n  `;
+    return `\n    <div class="form-group">\n      <label for="${t}-${Nt}" class="form-label">\n        ${Le.localize(e, 'modal.description', void 0, 'Description')}\n      </label>\n      <input type="text" id="${t}-${Nt}" placeholder="${Le.localize(e, 'modal.description_placeholder', void 0, 'Item description')}" />\n    </div> \n  `;
   })(n, i)}\n          ${(function (t, e) {
-    return `\n    <div class="auto-add-id-container">\n      <input type="checkbox" id="${t}-${Lt}" class="auto-add-id-checkbox" />\n      <label for="${t}-${Lt}" class="checkbox-label">\n        ${De.localize(e, 'modal.auto_add_id_to_description', void 0, 'Append inventory ID to item description')}\n      </label>\n    </div>\n  `;
+    return `\n    <div class="auto-add-id-container">\n      <input type="checkbox" id="${t}-${Dt}" class="auto-add-id-checkbox" />\n      <label for="${t}-${Dt}" class="checkbox-label">\n        ${Le.localize(e, 'modal.auto_add_id_to_description', void 0, 'Append inventory ID to item description')}\n      </label>\n    </div>\n  `;
   })(n, i)}\n\n          <div class="form-row">\n            ${(function (t, e) {
-    return `\n    <div class="input-group">\n      <label for="${t}-${Pt}">\n        ${De.localize(e, 'modal.quantity', void 0, 'Quantity')}\n      </label>\n      <input type="number" id="${t}-${Pt}" min="0" />\n    </div>\n  `;
+    return `\n    <div class="input-group">\n      <label for="${t}-${Pt}">\n        ${Le.localize(e, 'modal.quantity', void 0, 'Quantity')}\n      </label>\n      <input type="number" id="${t}-${Pt}" min="0" />\n    </div>\n  `;
   })(n, i)}\n            ${(function (t, e) {
-    return `\n    <div class="input-group">\n      <label for="${t}-${Bt}">\n        ${De.localize(e, 'modal.unit', void 0, 'Unit')}\n      </label>\n      <input type="text" id="${t}-${Bt}" placeholder="${De.localize(e, 'modal.unit_placeholder', void 0, 'kg, pcs, etc.')}" />\n    </div>\n  `;
+    return `\n    <div class="input-group">\n      <label for="${t}-${Bt}">\n        ${Le.localize(e, 'modal.unit', void 0, 'Unit')}\n      </label>\n      <input type="text" id="${t}-${Bt}" placeholder="${Le.localize(e, 'modal.unit_placeholder', void 0, 'kg, pcs, etc.')}" />\n    </div>\n  `;
   })(n, i)}\n          </div>\n\n          <div class="form-row">\n            ${(function (
     t,
     e,
     i = [],
   ) {
-    return `\n    <div class="input-group">\n      <label for="${t}-${Mt}" class="form-label">\n        ${De.localize(e, 'modal.category', void 0, 'Category')}\n      </label>\n      ${Qe({ id: `${t}-${Mt}`, placeholder: De.localize(e, 'modal.category_placeholder', void 0, 'Food, Tools, Supplies, etc.'), options: i.sort((t, e) => t.localeCompare(e, void 0, { sensitivity: 'base' })) })}\n    </div>\n  `;
+    return `\n    <div class="input-group">\n      <label for="${t}-${Mt}" class="form-label">\n        ${Le.localize(e, 'modal.category', void 0, 'Category')}\n      </label>\n      ${Qe({ id: `${t}-${Mt}`, placeholder: Le.localize(e, 'modal.category_placeholder', void 0, 'Food, Tools, Supplies, etc.'), options: i.sort((t, e) => t.localeCompare(e, void 0, { sensitivity: 'base' })) })}\n    </div>\n  `;
   })(n, i, o)}\n            ${(function (t, e, i = []) {
-    return `\n    <div class="input-group">\n      <label for="${t}-${Ft}" class="form-label">\n        ${De.localize(e, 'modal.location', void 0, 'Location')}\n      </label>\n      ${Qe({ id: `${t}-${Ft}`, placeholder: De.localize(e, 'modal.location_placeholder', void 0, 'Pantry, Garage Shelf, etc.'), options: i.sort((t, e) => t.localeCompare(e, void 0, { sensitivity: 'base' })) })}\n    </div>\n  `;
+    return `\n    <div class="input-group">\n      <label for="${t}-${Ft}" class="form-label">\n        ${Le.localize(e, 'modal.location', void 0, 'Location')}\n      </label>\n      ${Qe({ id: `${t}-${Ft}`, placeholder: Le.localize(e, 'modal.location_placeholder', void 0, 'Pantry, Garage Shelf, etc.'), options: i.sort((t, e) => t.localeCompare(e, void 0, { sensitivity: 'base' })) })}\n    </div>\n  `;
   })(n, i, r)}\n          </div>\n\n          <div class="form-row">\n            ${(function (
     t,
     e,
   ) {
-    return `\n    <div class="input-group">\n      <label for="${t}-${qt}" class="form-label">\n        ${De.localize(e, 'modal.expiry_date', void 0, 'Expiry Date')}\n      </label>\n      <input type="date" id="${t}-${qt}" />\n    </div>\n  `;
+    return `\n    <div class="input-group">\n      <label for="${t}-${qt}" class="form-label">\n        ${Le.localize(e, 'modal.expiry_date', void 0, 'Expiry Date')}\n      </label>\n      <input type="date" id="${t}-${qt}" />\n    </div>\n  `;
   })(n, i)}\n            ${(function (t, e) {
-    return `\n    <div class="input-group expiry-threshold-section">\n      <label for="${t}-${Ot}" class="form-label">\n        ${De.localize(e, 'modal.expiry_alert_threshold', void 0, 'Expiry Alert Threshold')}\n        <span class="optional">\n          ${De.localize(e, 'modal.days_before_expiry', void 0, '(days before expiry)')}\n        </span>\n      </label>\n      <input \n        type="number" \n        id="${t}-${Ot}" \n        min="1" \n        max="365"\n        placeholder="${De.localize(e, 'modal.set_expiry_first', void 0, 'Set expiry date first')}"\n        disabled\n      />\n      <small class="help-text">\n        ${De.localize(e, 'modal.expiry_help_text', void 0, 'How many days before expiry to show alerts')}\n      </small>\n    </div>\n  `;
+    return `\n    <div class="input-group expiry-threshold-section">\n      <label for="${t}-${Ot}" class="form-label">\n        ${Le.localize(e, 'modal.expiry_alert_threshold', void 0, 'Expiry Alert Threshold')}\n        <span class="optional">\n          ${Le.localize(e, 'modal.days_before_expiry', void 0, '(days before expiry)')}\n        </span>\n      </label>\n      <input \n        type="number" \n        id="${t}-${Ot}" \n        min="1" \n        max="365"\n        placeholder="${Le.localize(e, 'modal.set_expiry_first', void 0, 'Set expiry date first')}"\n        disabled\n      />\n      <small class="help-text">\n        ${Le.localize(e, 'modal.expiry_help_text', void 0, 'How many days before expiry to show alerts')}\n      </small>\n    </div>\n  `;
   })(
     n,
     i,
@@ -3630,16 +3686,16 @@ function We(t, e, i, o = [], r = []) {
     t,
     e,
   ) {
-    return `\n    <input type="checkbox" id="${t}-${Dt}" class="auto-add-checkbox" />\n    <label for="${t}-${Dt}" class="checkbox-label">\n      ${De.localize(e, 'modal.auto_add_when_low', void 0, 'Auto-add to todo list when low')}\n    </label>\n  `;
+    return `\n    <input type="checkbox" id="${t}-${Lt}" class="auto-add-checkbox" />\n    <label for="${t}-${Lt}" class="checkbox-label">\n      ${Le.localize(e, 'modal.auto_add_when_low', void 0, 'Auto-add to todo list when low')}\n    </label>\n  `;
   })(n, i)}\n            ${(function (t, e, i) {
-    return `\n    <div class="auto-add-controls" id="${t}-auto-add-controls">\n      <div class="auto-add-header">${De.localize(i, 'modal.auto_add_settings', void 0, 'Auto-add Settings')}</div>\n\n      <div class="form-row">\n\n        <div class="input-group">\n          <label for="${t}-${Rt}">\n            ${De.localize(i, 'modal.quantity_threshold', void 0, 'Quantity Threshold')}\n          </label>\n          <input \n            type="number" \n            id="${t}-${Rt}" \n            min="0"\n            class="auto-add-required"\n            placeholder="${De.localize(i, 'modal.minimum_quantity', void 0, 'Minimum quantity')}"\n          />\n        </div>\n\n        <div class="input-group">\n          <label for="${t}-${Ht}">${De.localize(i, 'modal.todo_list', void 0, 'Todo List')}</label>\n          <select id="${t}-${Ht}" class="auto-add-required">\n            <option value="">${De.localize(i, 'modal.select_list', void 0, 'Select list...')}</option>\n            ${e.map((t) => `<option value="${t.id}">${t.name}</option>`).join('')}\n          </select>\n        </div>\n\n      </div>\n\n    </div>\n  `;
+    return `\n    <div class="auto-add-controls" id="${t}-auto-add-controls">\n      <div class="auto-add-header">${Le.localize(i, 'modal.auto_add_settings', void 0, 'Auto-add Settings')}</div>\n\n      <div class="form-row">\n\n        <div class="input-group">\n          <label for="${t}-${Rt}">\n            ${Le.localize(i, 'modal.quantity_threshold', void 0, 'Quantity Threshold')}\n          </label>\n          <input \n            type="number" \n            id="${t}-${Rt}" \n            min="0"\n            class="auto-add-required"\n            placeholder="${Le.localize(i, 'modal.minimum_quantity', void 0, 'Minimum quantity')}"\n          />\n        </div>\n\n        <div class="input-group">\n          <label for="${t}-${Ht}">${Le.localize(i, 'modal.todo_list', void 0, 'Todo List')}</label>\n          <select id="${t}-${Ht}" class="auto-add-required">\n            <option value="">${Le.localize(i, 'modal.select_list', void 0, 'Select list...')}</option>\n            ${e.map((t) => `<option value="${t.id}">${t.name}</option>`).join('')}\n          </select>\n        </div>\n\n      </div>\n\n    </div>\n  `;
   })(
     n,
     t,
     i,
-  )}\n          </div>\n        </div>\n\n        <div class="modal-buttons">\n          <button ${e.primaryButtonId ? `id="${e.primaryButtonId}"` : ''} class="save-btn">${e.primaryButtonText}</button>\n          <button class="cancel-btn" ${e.closeAction ? `data-action="${e.closeAction}"` : ''}>\n            ${De.localize(i, 'modal.cancel', void 0, 'Cancel')}\n          </button>\n        </div>\n      </div>\n    </div>\n  `;
+  )}\n          </div>\n        </div>\n\n        <div class="modal-buttons">\n          <button ${e.primaryButtonId ? `id="${e.primaryButtonId}"` : ''} class="save-btn">${e.primaryButtonText}</button>\n          <button class="cancel-btn" ${e.closeAction ? `data-action="${e.closeAction}"` : ''}>\n            ${Le.localize(i, 'modal.cancel', void 0, 'Cancel')}\n          </button>\n        </div>\n      </div>\n    </div>\n  `;
 }
-function Xe(t, e, i) {
+function We(t, e, i) {
   const o = (t) => {
       const i = e.find((e) => e.entity_id === t || e.id === t);
       return i ? i.name : t;
@@ -3655,35 +3711,35 @@ function Xe(t, e, i) {
               e = 1 === t ? 'expiry.expired_day_ago' : 'expiry.expired_days_ago';
             return {
               class: 'expired',
-              label: De.localize(i, e, { days: t }, `Expired ${t} day${1 !== t ? 's' : ''} ago`),
+              label: Le.localize(i, e, { days: t }, `Expired ${t} day${1 !== t ? 's' : ''} ago`),
             };
           }
           if (0 === n)
             return {
               class: 'expires-today',
-              label: De.localize(i, 'expiry.expires_today', void 0, 'Expires today'),
+              label: Le.localize(i, 'expiry.expires_today', void 0, 'Expires today'),
             };
           if (n <= e) {
             const t = 1 === n ? 'expiry.expires_in_day' : 'expiry.expires_in_days';
             return {
               class: 'expiring-soon',
-              label: De.localize(i, t, { days: n }, `Expires in ${n} day${1 !== n ? 's' : ''}`),
+              label: Le.localize(i, t, { days: n }, `Expires in ${n} day${1 !== n ? 's' : ''}`),
             };
           }
           return { class: 'expiry-safe', label: `${t}` };
         })(t.expiry_date, t.expiry_alert_days)
       : null;
-  return `\n    <div class="item-row ${0 === t.quantity ? 'zero-quantity' : ''} ${t.auto_add_enabled ? 'auto-add-enabled' : ''}" data-action="item_click" data-name="${t.name}">\n      <div class="item-header">\n        <span class="item-name">${t.name}</span>\n        ${t.location && t.category ? `<span class="location-category">${t.location} | ${t.category}</span>` : t.location ? `<span class="location">${t.location}</span>` : t.category ? `<span class="category">${t.category}</span>` : ''}\n      </div>\n      <div class="item-description">\n        <span>${t.description || ''}</span>\n      </div>\n      <div class="item-footer">\n        <div class="item-details">\n          <span class="quantity">${t.quantity} ${t.unit || ''}</span>\n          ${r ? `<span class="expiry ${r.class}">${r.label}</span>` : ''}\n          ${t.auto_add_enabled ? `<span class="auto-add-info">${De.localize(i, 'items.auto_add_info', { quantity: t.auto_add_to_list_quantity || 0, list: o(t.todo_list || '') }, `Auto-add at ≤ ${t.auto_add_to_list_quantity || 0} → ${o(t.todo_list || '')}`)}</span>` : ''}\n\n        </div>\n        <div class="item-controls">\n          <button class="edit-btn" data-action="open_edit" data-name="${t.name}">⚙️</button>\n          <button class="control-btn" data-action="decrement" data-name="${t.name}" ${0 === t.quantity ? 'disabled' : ''}>➖</button>\n          <button class="control-btn" data-action="increment" data-name="${t.name}">➕</button>\n          <button class="control-btn" data-action="remove" data-name="${t.name}">❌</button>\n        </div>\n      </div>\n    </div>\n  `;
+  return `\n    <div class="item-row ${0 === t.quantity ? 'zero-quantity' : ''} ${t.auto_add_enabled ? 'auto-add-enabled' : ''}" data-action="item_click" data-name="${t.name}">\n      <div class="item-header">\n        <span class="item-name">${t.name}</span>\n        ${t.location && t.category ? `<span class="location-category">${t.location} | ${t.category}</span>` : t.location ? `<span class="location">${t.location}</span>` : t.category ? `<span class="category">${t.category}</span>` : ''}\n      </div>\n      <div class="item-description">\n        <span>${t.description || ''}</span>\n      </div>\n      <div class="item-footer">\n        <div class="item-details">\n          <span class="quantity">${t.quantity} ${t.unit || ''}</span>\n          ${r ? `<span class="expiry ${r.class}">${r.label}</span>` : ''}\n          ${t.auto_add_enabled ? `<span class="auto-add-info">${Le.localize(i, 'items.auto_add_info', { quantity: t.auto_add_to_list_quantity || 0, list: o(t.todo_list || '') }, `Auto-add at ≤ ${t.auto_add_to_list_quantity || 0} → ${o(t.todo_list || '')}`)}</span>` : ''}\n\n        </div>\n        <div class="item-controls">\n          <button class="edit-btn" data-action="open_edit" data-name="${t.name}">⚙️</button>\n          <button class="control-btn" data-action="decrement" data-name="${t.name}" ${0 === t.quantity ? 'disabled' : ''}>➖</button>\n          <button class="control-btn" data-action="increment" data-name="${t.name}">➕</button>\n          <button class="control-btn" data-action="remove" data-name="${t.name}">❌</button>\n        </div>\n      </div>\n    </div>\n  `;
 }
-function Je(t, e, i, o) {
+function Xe(t, e, i, o) {
   if (0 === t.length) {
-    return `<div class="no-items">${De.localize(o, 'items.no_items', void 0, 'No items in inventory')}</div>`;
+    return `<div class="no-items">${Le.localize(o, 'items.no_items', void 0, 'No items in inventory')}</div>`;
   }
   return 'category' === e
     ? Ze(t, i, o)
     : 'location' === e
       ? Ge(t, i, o)
-      : t.map((t) => Xe(t, i, o)).join('');
+      : t.map((t) => We(t, i, o)).join('');
 }
 function Ze(t, e, i) {
   const o = Ce.groupItemsByCategory(t);
@@ -3691,7 +3747,7 @@ function Ze(t, e, i) {
     .sort()
     .map(
       (t) =>
-        `\n        <div class="${oe}">\n          <div class="${re}">${t}</div>\n          ${o[t].map((t) => Xe(t, e, i)).join('')}\n        </div>\n      `,
+        `\n        <div class="${oe}">\n          <div class="${re}">${t}</div>\n          ${o[t].map((t) => We(t, e, i)).join('')}\n        </div>\n      `,
     )
     .join('');
 }
@@ -3701,13 +3757,13 @@ function Ge(t, e, i) {
     .sort()
     .map(
       (t) =>
-        `\n        <div class="${ae}">\n          <div class="${se}">${t}</div>\n          ${o[t].map((t) => Xe(t, e, i)).join('')}\n        </div>\n`,
+        `\n        <div class="${ae}">\n          <div class="${se}">${t}</div>\n          ${o[t].map((t) => We(t, e, i)).join('')}\n        </div>\n`,
     )
     .join('');
 }
 const Ke = /* @__PURE__ */ Object.freeze(
   /* @__PURE__ */ Object.defineProperty(
-    { __proto__: null, createItemsByCategory: Ze, createItemsByLocation: Ge, createItemsList: Je },
+    { __proto__: null, createItemsByCategory: Ze, createItemsByLocation: Ge, createItemsList: Xe },
     Symbol.toStringTag,
     { value: 'Module' },
   ),
@@ -3717,46 +3773,46 @@ function ti(t, e, i, o, r, n, a, s, l, d) {
     t,
     e,
   ) {
-    return `\n    <label for="${ee}">${De.localize(e, 'sort.sort_by', void 0, 'Sort by:')}</label> \n    <select id="${ee}">\n      <option value="name" ${'name' === t ? 'selected' : ''}>\n        ${De.localize(e, 'sort.name', void 0, 'Name')}\n      </option>\n\n      <option value="category" ${'category' === t ? 'selected' : ''}>\n        ${De.localize(e, 'sort.category', void 0, 'Category')}\n      </option>\n\n      <option value="location" ${'location' === t ? 'selected' : ''}>\n        ${De.localize(e, 'sort.location', void 0, 'Location')}\n      </option>\n\n      <option value="quantity" ${'quantity' === t ? 'selected' : ''}>\n        ${De.localize(e, 'sort.quantity_high', void 0, 'Quantity (High)')}\n      </option>\n\n      <option value="quantity-low" ${'quantity-low' === t ? 'selected' : ''}>\n        ${De.localize(e, 'sort.quantity_low', void 0, 'Quantity (Low)')}\n      </option>\n\n      <option value="expiry" ${'expiry' === t ? 'selected' : ''}>\n        ${De.localize(e, 'sort.expiry_date', void 0, 'Expiry Date')}\n      </option>\n\n      <option value="zero-last" ${'zero-last' === t ? 'selected' : ''}>\n        ${De.localize(e, 'sort.zero_last', void 0, 'Zero Last')}\n      </option>\n\n    </select>\n  `;
+    return `\n    <label for="${ee}">${Le.localize(e, 'sort.sort_by', void 0, 'Sort by:')}</label> \n    <select id="${ee}">\n      <option value="name" ${'name' === t ? 'selected' : ''}>\n        ${Le.localize(e, 'sort.name', void 0, 'Name')}\n      </option>\n\n      <option value="category" ${'category' === t ? 'selected' : ''}>\n        ${Le.localize(e, 'sort.category', void 0, 'Category')}\n      </option>\n\n      <option value="location" ${'location' === t ? 'selected' : ''}>\n        ${Le.localize(e, 'sort.location', void 0, 'Location')}\n      </option>\n\n      <option value="quantity" ${'quantity' === t ? 'selected' : ''}>\n        ${Le.localize(e, 'sort.quantity_high', void 0, 'Quantity (High)')}\n      </option>\n\n      <option value="quantity-low" ${'quantity-low' === t ? 'selected' : ''}>\n        ${Le.localize(e, 'sort.quantity_low', void 0, 'Quantity (Low)')}\n      </option>\n\n      <option value="expiry" ${'expiry' === t ? 'selected' : ''}>\n        ${Le.localize(e, 'sort.expiry_date', void 0, 'Expiry Date')}\n      </option>\n\n      <option value="zero-last" ${'zero-last' === t ? 'selected' : ''}>\n        ${Le.localize(e, 'sort.zero_last', void 0, 'Zero Last')}\n      </option>\n\n    </select>\n  `;
   })(
     o,
     d,
-  )}\n        </div>\n        <button id="${Vt}" class="add-new-btn">\n          + ${De.localize(d, 'modal.add_item', void 0, 'Add Item')}\n        </button>\n      </div>\n\n      <div class="search-controls">\n        ${Ye(i, r, n, d)}\n      </div>\n\n      ${(function (
+  )}\n        </div>\n        <button id="${Yt}" class="add-new-btn">\n          + ${Le.localize(d, 'modal.add_item', void 0, 'Add Item')}\n        </button>\n      </div>\n\n      <div class="search-controls">\n        ${Ve(i, r, n, d)}\n      </div>\n\n      ${(function (
     t,
     e,
   ) {
     const i = Pe(t, e),
       o = i.length > 0;
-    return `\n    <div id="${Yt}" class="active-filters" style="display: ${o ? 'block' : 'none'};">\n      <div id="${Qt}" class="filter-badges-container">\n        ${i.join('')}\n      </div>\n    </div>\n  `;
+    return `\n    <div id="${Vt}" class="active-filters" style="display: ${o ? 'block' : 'none'};">\n      <div id="${Qt}" class="filter-badges-container">\n        ${i.join('')}\n      </div>\n    </div>\n  `;
   })(
     i,
     d,
-  )}\n\n      <div class="items-container">\n        ${e.length > 0 ? Je(e, o, a, d) : `<div class="empty-state">${De.localize(d, 'items.no_items', void 0, 'No items in inventory')}</div>`}\n      </div>\n\n      ${(function (
+  )}\n\n      <div class="items-container">\n        ${e.length > 0 ? Xe(e, o, a, d) : `<div class="empty-state">${Le.localize(d, 'items.no_items', void 0, 'No items in inventory')}</div>`}\n      </div>\n\n      ${(function (
     t,
     e,
     i,
     o,
   ) {
-    return We(
+    return Je(
       t,
       {
         id: zt,
-        title: De.localize(e, 'modal.add_item', void 0, 'Add Item'),
-        primaryButtonText: De.localize(e, 'modal.add_item', void 0, 'Add Item'),
+        title: Le.localize(e, 'modal.add_item', void 0, 'Add Item'),
+        primaryButtonText: Le.localize(e, 'modal.add_item', void 0, 'Add Item'),
         primaryButtonId: jt,
-        closeAction: pe,
+        closeAction: he,
       },
       e,
       i,
       o,
     );
   })(a, d, r, n)}\n      ${(function (t, e, i, o) {
-    return We(
+    return Je(
       t,
       {
         id: Ct,
-        title: De.localize(e, 'modal.edit_item', void 0, 'Edit Item'),
-        primaryButtonText: De.localize(e, 'modal.save_changes', void 0, 'Save Changes'),
+        title: Le.localize(e, 'modal.edit_item', void 0, 'Edit Item'),
+        primaryButtonText: Le.localize(e, 'modal.save_changes', void 0, 'Save Changes'),
       },
       e,
       i,
@@ -3773,15 +3829,15 @@ class ei {
       l = Ce.getInventoryDescription(t),
       d = t?.attributes?.items || [],
       c = [...new Set(d.map((t) => t.category).filter((t) => !!t))].sort(),
-      p = [...new Set(d.map((t) => t.location).filter((t) => !!t))].sort();
-    this.shadowRoot.innerHTML = ti(s, i, o, r, c, p, n, d, l, a);
+      h = [...new Set(d.map((t) => t.location).filter((t) => !!t))].sort();
+    this.shadowRoot.innerHTML = ti(s, i, o, r, c, h, n, d, l, a);
   }
   renderError(t, e) {
-    const i = e ? De.localize(e, 'common.error', void 0, 'Error') : 'Error';
+    const i = e ? Le.localize(e, 'common.error', void 0, 'Error') : 'Error';
     this.shadowRoot.innerHTML = `\n      <style>${Be}</style>\n      <ha-card>\n        <div class="card-content">\n          <div class="error-message" style="color: var(--error-color); padding: 16px; text-align: center;">\n            <p><strong>${i}:</strong> ${Ce.sanitizeHtml(t)}</p>\n          </div>\n        </div>\n      </ha-card>\n    `;
   }
   renderLoading(t) {
-    const e = t ? De.localize(t, 'common.loading', void 0, 'Loading...') : 'Loading...';
+    const e = t ? Le.localize(t, 'common.loading', void 0, 'Loading...') : 'Loading...';
     this.shadowRoot.innerHTML = `\n      <style>${Be}</style>\n      <ha-card>\n        <div class="card-content">\n          <div class="loading-container" style="padding: 16px; text-align: center;">\n            <p>${e}</p>\n          </div>\n        </div>\n      </ha-card>\n    `;
   }
 }
@@ -3946,7 +4002,7 @@ class ri {
     const o = e.id;
     if (o && 'BUTTON' === e.tagName)
       switch (o) {
-        case Vt: {
+        case Yt: {
           (t.preventDefault(), t.stopPropagation());
           const e = this.getUniqueLocations(),
             i = this.getUniqueCategories();
@@ -3956,10 +4012,10 @@ class ri {
         case jt:
           (t.preventDefault(), t.stopPropagation(), await this.handleAddItem());
           break;
-        case Wt:
+        case Jt:
           (t.preventDefault(), t.stopPropagation(), this.toggleAdvancedFilters());
           break;
-        case Xt:
+        case Wt:
           (t.preventDefault(), t.stopPropagation(), this.clearFilters());
           break;
         default:
@@ -4063,11 +4119,11 @@ class ri {
           case ue:
             (await this.services.incrementItem(t, i), this.renderCallback());
             break;
-          case he:
+          case pe:
             (await this.services.decrementItem(t, i), this.renderCallback());
             break;
           case ye: {
-            const e = De.localize(
+            const e = Le.localize(
               this.translations,
               'actions.confirm_remove',
               { name: i },
@@ -4128,7 +4184,7 @@ class ri {
       }, 50);
     } catch (t) {
       console.error('Error clearing filters:', t);
-      const e = De.localize(
+      const e = Le.localize(
         this.translations,
         'errors.clear_filters_error',
         void 0,
@@ -4165,10 +4221,10 @@ class ri {
       i = this.getUniqueLocations();
     setTimeout(() => {
       (oi({
-        id: Jt,
+        id: Xt,
         options: e,
         selected: t.category,
-        placeholder: De.localize(
+        placeholder: Le.localize(
           this.translations,
           'filters.all_categories',
           void 0,
@@ -4187,7 +4243,7 @@ class ri {
           id: Gt,
           options: i,
           selected: t.location,
-          placeholder: De.localize(
+          placeholder: Le.localize(
             this.translations,
             'filters.all_locations',
             void 0,
@@ -4206,12 +4262,12 @@ class ri {
           id: Zt,
           options: ['none', 'expired', 'soon', 'future'],
           selected: t.expiry,
-          placeholder: De.localize(this.translations, 'filters.all_items', void 0, 'All Items'),
+          placeholder: Le.localize(this.translations, 'filters.all_items', void 0, 'All Items'),
           labels: {
-            none: De.localize(this.translations, 'filters.no_expiry', void 0, 'No Expiry'),
-            expired: De.localize(this.translations, 'filters.expired', void 0, 'Expired'),
-            soon: De.localize(this.translations, 'filters.expiring_soon', void 0, 'Expiring Soon'),
-            future: De.localize(this.translations, 'filters.future', void 0, 'Future'),
+            none: Le.localize(this.translations, 'filters.no_expiry', void 0, 'No Expiry'),
+            expired: Le.localize(this.translations, 'filters.expired', void 0, 'Expired'),
+            soon: Le.localize(this.translations, 'filters.expiring_soon', void 0, 'Expiring Soon'),
+            future: Le.localize(this.translations, 'filters.future', void 0, 'Future'),
           },
           shadowRoot: this.renderRoot,
           onChange: (t) => {
@@ -4226,15 +4282,15 @@ class ri {
           id: Kt,
           options: ['zero', 'nonzero'],
           selected: t.quantity,
-          placeholder: De.localize(
+          placeholder: Le.localize(
             this.translations,
             'filters.all_quantities',
             void 0,
             'All Quantities',
           ),
           labels: {
-            zero: De.localize(this.translations, 'filters.zero', void 0, 'Zero'),
-            nonzero: De.localize(this.translations, 'filters.non_zero', void 0, 'Non-zero'),
+            zero: Le.localize(this.translations, 'filters.zero', void 0, 'Zero'),
+            nonzero: Le.localize(this.translations, 'filters.non_zero', void 0, 'Non-zero'),
           },
           shadowRoot: this.renderRoot,
           onChange: (t) => {
@@ -4275,13 +4331,13 @@ class ni {
           d = new ei(this.renderRoot),
           c = new ii();
         c.setRenderCallback(i);
-        const p = (e) => Ce.getInventoryId(t, e),
-          h = new Ue(this.renderRoot, s, p, o),
-          u = new ri(this.renderRoot, s, h, l, e, t, i, r, n, a);
+        const h = (e) => Ce.getInventoryId(t, e),
+          p = new Ue(this.renderRoot, s, h, o),
+          u = new ri(this.renderRoot, s, p, l, e, t, i, r, n, a);
         return (
           (this.services = {
             services: s,
-            modals: h,
+            modals: p,
             filters: l,
             renderer: d,
             state: c,
@@ -4325,7 +4381,7 @@ class ai {
         const n = t.entity,
           a = e.states[n];
         if (!a) {
-          const t = De.localize(
+          const t = Le.localize(
             o,
             'errors.entity_not_found',
             { entity: n },
@@ -4335,7 +4391,7 @@ class ai {
         }
         const s = this.lifecycleManager.getServices();
         if (!s) {
-          const t = De.localize(
+          const t = Le.localize(
             o,
             'errors.initialization_failed',
             void 0,
@@ -4343,19 +4399,19 @@ class ai {
           );
           return void this.renderError(t);
         }
-        const { filters: l, renderer: d, eventHandler: c, state: p } = s,
-          h = l.getCurrentFilters(n),
-          u = h.sortMethod || ve.SORT_METHOD,
+        const { filters: l, renderer: d, eventHandler: c, state: h } = s,
+          p = l.getCurrentFilters(n),
+          u = p.sortMethod || ve.SORT_METHOD,
           m = r(a.attributes?.items || []),
-          g = l.filterItems(m, h),
+          g = l.filterItems(m, p),
           y = l.sortItems(g, u, o);
-        (d.renderCard(a, n, y, h, u, i, o),
+        (d.renderCard(a, n, y, p, u, i, o),
           c.setupEventListeners(),
-          l.updateFilterIndicators(h, o),
-          p.trackUserInteraction(this.renderRoot));
+          l.updateFilterIndicators(p, o),
+          h.trackUserInteraction(this.renderRoot));
       } catch (n) {
         console.error('Error rendering card:', n);
-        const t = De.localize(
+        const t = Le.localize(
           o,
           'errors.render_error',
           void 0,
@@ -4389,7 +4445,7 @@ class ai {
     const i = this.lifecycleManager.getServices();
     if (i?.renderer) i.renderer.renderError(t);
     else {
-      const i = e ? De.localize(e, 'common.error', void 0, 'Error') : 'Error';
+      const i = e ? Le.localize(e, 'common.error', void 0, 'Error') : 'Error';
       this.renderRoot.innerHTML = `\n        <ha-card>\n          <div class="card-content">\n            <div class="error-message" style="color: var(--error-color); padding: 16px; text-align: center;">\n              <p><strong>${i}:</strong> ${Ce.sanitizeHtml(t)}</p>\n            </div>\n          </div>\n        </ha-card>\n      `;
     }
   }
@@ -4469,13 +4525,13 @@ class li extends st {
   async _loadTranslations() {
     const t = this._hass?.language || this._hass?.selectedLanguage || 'en';
     try {
-      this._translations = await De.loadTranslations(t);
+      this._translations = await Le.loadTranslations(t);
     } catch (e) {
       (console.warn('Failed to load translations:', e), (this._translations = {}));
     }
   }
   localize(t, e, i) {
-    return De.localize(this._translations, t, e, i);
+    return Le.localize(this._translations, t, e, i);
   }
   _refreshAfterSave() {
     this.renderingCoordinator.refreshAfterSave(() => this.render());
@@ -4499,8 +4555,8 @@ class li extends st {
 (!(async function () {
   try {
     const t = document.documentElement.lang || navigator.language.substring(0, 2) || 'en',
-      e = await De.loadTranslations(t),
-      i = De.localize(e, 'card.description', void 0, si);
+      e = await Le.loadTranslations(t),
+      i = Le.localize(e, 'card.description', void 0, si);
     if (i !== si) {
       si = i;
       const t = window.customCards?.find((t) => 'simple-inventory-card' === t.type);

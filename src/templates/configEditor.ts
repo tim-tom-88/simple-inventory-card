@@ -36,7 +36,9 @@ export function createItemClickActionEditor(
   actionService: string,
   actionTargetJson: string,
   actionDataJson: string,
+  actionYaml: string,
   onValueChanged: (event_: Event) => void,
+  onYamlChanged: (event_: CustomEvent) => void,
   translations: TranslationData,
 ): TemplateResult {
   return html`
@@ -94,6 +96,20 @@ export function createItemClickActionEditor(
             data-field="item_click_data"
             @change=${onValueChanged}
           ></ha-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ha-yaml-editor
+            .label=${TranslationManager.localize(
+              translations,
+              'config.item_click_yaml',
+              undefined,
+              'Item click action YAML (optional)',
+            )}
+            .value=${actionYaml}
+            @value-changed=${onYamlChanged}
+          ></ha-yaml-editor>
         </div>
       </div>
     </div>

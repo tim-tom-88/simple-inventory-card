@@ -29,7 +29,8 @@ export const configEditorStyles: CSSResult = css`
   }
 
   ha-textfield,
-  ha-textarea {
+  ha-textarea,
+  ha-yaml-editor {
     width: 100%;
   }
 

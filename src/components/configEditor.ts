@@ -106,7 +106,9 @@ class ConfigEditor extends LitElement {
           this._config?.item_click_action?.service || '',
           this._stringifyJson(this._config?.item_click_action?.target),
           this._stringifyJson(this._config?.item_click_action?.data),
+          this._stringifyYaml(this._config?.item_click_action),
           this._actionValueChanged.bind(this),
+          this._actionYamlChanged.bind(this),
           this._translations,
         )}
         ${this._entity
@@ -213,6 +215,41 @@ class ConfigEditor extends LitElement {
     );
   }
 
+  private _actionYamlChanged(event_: CustomEvent): void {
+    if (!this._config) {
+      return;
+    }
+
+    const value =
+      (event_.detail?.value as string | undefined) ||
+      ((event_.target as HTMLInputElement | undefined)?.value ?? '');
+    const parsed = this._parseYamlOrJsonInput(value);
+    if (parsed === undefined) {
+      return;
+    }
+
+    const config: InventoryConfig = {
+      ...this._config,
+      ...(parsed ? { item_click_action: parsed } : {}),
+      type: this._config.type || 'custom:simple-inventory-card',
+    };
+
+    if (!parsed && this._config.item_click_action) {
+      delete (config as InventoryConfig & { item_click_action?: unknown }).item_click_action;
+    }
+
+    this._config = config;
+    this.requestUpdate();
+
+    this.dispatchEvent(
+      new CustomEvent('config-changed', {
+        detail: { config: config },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  }
+
   private _parseJsonInput(value: string): Record<string, any> | undefined | null {
     const trimmed = value.trim();
     if (!trimmed) {
@@ -228,8 +265,47 @@ class ConfigEditor extends LitElement {
     }
   }
 
+  private _parseYamlOrJsonInput(value: string): Record<string, any> | undefined | null {
+    const trimmed = value.trim();
+    if (!trimmed) {
+      return null;
+    }
+
+    const yaml = (globalThis as { jsyaml?: { load?: (input: string) => unknown } }).jsyaml;
+    if (yaml?.load) {
+      try {
+        const parsed = yaml.load(trimmed);
+        if (parsed && typeof parsed === 'object') {
+          return parsed as Record<string, any>;
+        }
+        return null;
+      } catch (error) {
+        console.warn('Invalid YAML in item click action field:', error);
+        alert('Invalid YAML. Please correct it before saving.');
+        return undefined;
+      }
+    }
+
+    return this._parseJsonInput(value);
+  }
+
   private _stringifyJson(value?: Record<string, any>): string {
     return value ? JSON.stringify(value, null, 2) : '';
+  }
+
+  private _stringifyYaml(value?: Record<string, any>): string {
+    if (!value) {
+      return '';
+    }
+    const yaml = (globalThis as { jsyaml?: { dump?: (input: unknown) => string } }).jsyaml;
+    if (yaml?.dump) {
+      try {
+        return yaml.dump(value);
+      } catch (error) {
+        console.warn('Failed to stringify YAML for item click action:', error);
+      }
+    }
+    return this._stringifyJson(value);
   }
 
   static get styles(): CSSResult {
