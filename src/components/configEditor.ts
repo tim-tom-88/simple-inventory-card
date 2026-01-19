@@ -5,6 +5,7 @@ import {
   createEntitySelector,
   createEntityInfo,
   createNoEntityMessage,
+  createItemClickActionEditor,
 } from '../templates/configEditor';
 import { configEditorStyles } from '../styles/configEditor';
 import { TranslationData } from '@/types/translatableComponent';
@@ -101,6 +102,13 @@ class ConfigEditor extends LitElement {
           this._valueChanged.bind(this),
           this._translations,
         )}
+        ${createItemClickActionEditor(
+          this._config?.item_click_action?.service || '',
+          this._stringifyJson(this._config?.item_click_action?.target),
+          this._stringifyJson(this._config?.item_click_action?.data),
+          this._actionValueChanged.bind(this),
+          this._translations,
+        )}
         ${this._entity
           ? createEntityInfo(this.hass, this._entity, this._translations)
           : createNoEntityMessage(this._translations)}
@@ -136,6 +144,92 @@ class ConfigEditor extends LitElement {
         composed: true,
       }),
     );
+  }
+
+  private _actionValueChanged(event_: Event): void {
+    if (!this._config) {
+      return;
+    }
+
+    const target = event_.target as HTMLInputElement;
+    const field = target?.dataset?.field;
+    if (!field) {
+      return;
+    }
+
+    const value = target.value ?? '';
+    const nextAction = { ...(this._config.item_click_action || {}) };
+
+    if (field === 'item_click_service') {
+      if (value.trim()) {
+        nextAction.service = value.trim();
+      } else {
+        delete nextAction.service;
+      }
+    }
+
+    if (field === 'item_click_target') {
+      const parsed = this._parseJsonInput(value);
+      if (parsed === undefined) {
+        return;
+      }
+      if (parsed) {
+        nextAction.target = parsed;
+      } else {
+        delete nextAction.target;
+      }
+    }
+
+    if (field === 'item_click_data') {
+      const parsed = this._parseJsonInput(value);
+      if (parsed === undefined) {
+        return;
+      }
+      if (parsed) {
+        nextAction.data = parsed;
+      } else {
+        delete nextAction.data;
+      }
+    }
+
+    const hasActionValues =
+      (nextAction.service && nextAction.service.trim()) || nextAction.target || nextAction.data;
+
+    const config: InventoryConfig = {
+      ...this._config,
+      ...(hasActionValues ? { item_click_action: nextAction } : {}),
+      type: this._config.type || 'custom:simple-inventory-card',
+    };
+
+    this._config = config;
+    this.requestUpdate();
+
+    this.dispatchEvent(
+      new CustomEvent('config-changed', {
+        detail: { config: config },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  }
+
+  private _parseJsonInput(value: string): Record<string, any> | undefined | null {
+    const trimmed = value.trim();
+    if (!trimmed) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(trimmed) as Record<string, any>;
+    } catch (error) {
+      console.warn('Invalid JSON in item click action field:', error);
+      alert('Invalid JSON. Please correct it before saving.');
+      return undefined;
+    }
+  }
+
+  private _stringifyJson(value?: Record<string, any>): string {
+    return value ? JSON.stringify(value, null, 2) : '';
   }
 
   static get styles(): CSSResult {

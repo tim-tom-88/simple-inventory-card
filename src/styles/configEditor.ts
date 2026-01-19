@@ -28,6 +28,17 @@ export const configEditorStyles: CSSResult = css`
     width: 100%;
   }
 
+  ha-textfield,
+  ha-textarea {
+    width: 100%;
+  }
+
+  .section-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--primary-text-color);
+  }
+
   .entity-info {
     background: var(--secondary-background-color);
     border-radius: 8px;

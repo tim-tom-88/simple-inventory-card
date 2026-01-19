@@ -261,6 +261,25 @@ export class EventHandler {
           const state = this.hass.states[this.config.entity];
           const items = Utilities.validateInventoryItems(state?.attributes?.items || []);
           const item = items.find((entry) => entry.name === itemName);
+          const actionContext = {
+            inventory_id: inventoryId,
+            entity_id: this.config.entity,
+            name: itemName,
+            location: item?.location ?? '',
+            category: item?.category ?? '',
+            quantity: item?.quantity ?? 0,
+            unit: item?.unit ?? '',
+            description: item?.description ?? '',
+            expiry_date: item?.expiry_date ?? '',
+            expiry_alert_days: item?.expiry_alert_days ?? 0,
+            auto_add_enabled: item?.auto_add_enabled ?? false,
+            auto_add_to_list_quantity: item?.auto_add_to_list_quantity ?? 0,
+            todo_list: item?.todo_list ?? '',
+          };
+
+          if (this.config.item_click_action?.service) {
+            await this.services.callItemClickAction(this.config.item_click_action, actionContext);
+          }
           await this.services.fireItemClickEvent(inventoryId, this.config.entity, itemName, item);
           break;
         }

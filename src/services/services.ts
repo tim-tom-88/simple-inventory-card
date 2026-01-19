@@ -1,5 +1,5 @@
 import { DOMAIN, EVENT_TYPES, SERVICES, PARAMS } from '../utils/constants';
-import { HomeAssistant, InventoryItem } from '../types/homeAssistant';
+import { HomeAssistant, InventoryItem, ItemClickActionConfig } from '../types/homeAssistant';
 import { ItemData } from '../types/inventoryItem';
 import { Utilities } from '../utils/utilities';
 
@@ -216,5 +216,66 @@ export class Services {
         error: error instanceof Error ? error.message : String(error),
       };
     }
+  }
+
+  async callItemClickAction(
+    action: ItemClickActionConfig,
+    context: Record<string, string | number | boolean>,
+  ): Promise<ServiceResult> {
+    try {
+      const serviceName = Utilities.sanitizeString(action.service, 255);
+      if (!serviceName || !serviceName.includes('.')) {
+        return { success: false, error: 'Invalid service name for item click action' };
+      }
+
+      const [domain, service] = serviceName.split('.', 2);
+      const data = this.interpolateTemplateValues(action.data, context) as
+        | Record<string, any>
+        | undefined;
+      const target = this.interpolateTemplateValues(action.target, context) as
+        | Record<string, any>
+        | undefined;
+
+      await this.hass.callService(domain, service, data, target);
+      return { success: true };
+    } catch (error) {
+      console.error('Error calling item click action:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : String(error),
+      };
+    }
+  }
+
+  private interpolateTemplateValues(
+    value: unknown,
+    context: Record<string, string | number | boolean>,
+  ): unknown {
+    if (typeof value === 'string') {
+      const exactMatch = value.match(/^{{\s*([a-z0-9_]+)\s*}}$/i);
+      if (exactMatch) {
+        const replacement = context[exactMatch[1]];
+        return replacement === undefined || replacement === null ? '' : replacement;
+      }
+
+      return value.replace(/{{\s*([a-z0-9_]+)\s*}}/gi, (_match, key) => {
+        const replacement = context[key];
+        return replacement === undefined || replacement === null ? '' : String(replacement);
+      });
+    }
+
+    if (Array.isArray(value)) {
+      return value.map((entry) => this.interpolateTemplateValues(entry, context));
+    }
+
+    if (value && typeof value === 'object') {
+      const result: Record<string, unknown> = {};
+      Object.entries(value as Record<string, unknown>).forEach(([key, entry]) => {
+        result[key] = this.interpolateTemplateValues(entry, context);
+      });
+      return result;
+    }
+
+    return value;
   }
 }

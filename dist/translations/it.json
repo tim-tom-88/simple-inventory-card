@@ -1,0 +1,119 @@
+{
+  "card": {
+    "description": "Una card per gestire i tuoi inventari"
+  },
+  "common": {
+    "loading": "Caricamento...",
+    "name": "La mia Card",
+    "off": "Off",
+    "on": "On",
+    "uncategorized": "Senza categoria",
+    "no_location": "Nessuna posizione",
+    "unknown": "Sconosciuto"
+  },
+  "editor": {
+    "entity": "Entità",
+    "name": "Nome (Opzionale)",
+    "show_icon": "Mostra icona",
+    "show_state": "Mostra stato"
+  },
+  "state": {
+    "active": "Attivo",
+    "inactive": "Inattivo",
+    "unavailable": "Non disponibile"
+  },
+  "expiry": {
+    "expired_day_ago": "Scaduto {days} giorno fa",
+    "expired_days_ago": "Scaduto {days} giorni fa",
+    "expires_in_day": "Scade tra {days} giorno",
+    "expires_in_days": "Scade tra {days} giorni",
+    "expires_today": "Scade oggi"
+  },
+  "items": {
+    "auto_add_info": "Aggiunta automatica a ≤ {quantity} → {list}",
+    "no_items": "Nessun oggetto in inventario"
+  },
+  "header": {
+    "items_expired": "{count} oggett{count, plural, one {o} other {i}} scadut{count, plural, one {o} other {i}}",
+    "items_expiring_soon": "{count} oggett{count, plural, one {o} other {i}} in scadenza a breve"
+  },
+  "modal": {
+    "add_item": "Aggiungi oggetto",
+    "auto_add_id_to_description": "Aggiungi l’ID dell’inventario alla descrizione dell’articolo",
+    "auto_add_settings": "Impostazioni auto-aggiunta",
+    "auto_add_when_low": "Aggiungi alla lista attività quando la quantità è bassa",
+    "cancel": "Annulla",
+    "description": "Descrizione",
+    "description_placeholder": "Descrizione dell’articolo",
+    "category": "Categoria",
+    "category_placeholder": "Cibo, Pulizia, ecc.",
+    "location": "Posizione",
+    "location_placeholder": "Dispensa, Garage, ecc.",
+    "days_before_expiry": "(giorni prima della scadenza)",
+    "edit_item": "Modifica oggetto",
+    "expiry_alert_threshold": "Soglia di avviso scadenza",
+    "expiry_date": "Data di scadenza",
+    "expiry_help_text": "Quanti giorni prima della scadenza mostrare l’avviso",
+    "expiry_threshold_placeholder": "Giorni prima della scadenza per avvisare (predefinito: 0)",
+    "minimum_quantity": "Quantità minima",
+    "name_required": "Nome *",
+    "quantity": "Quantità",
+    "quantity_threshold": "Soglia quantità",
+    "save_changes": "Salva modifiche",
+    "select_list": "Seleziona la lista...",
+    "set_expiry_first": "Imposta prima la data di scadenza",
+    "todo_list": "Lista attività",
+    "unit": "Unità",
+    "unit_placeholder": "kg, pz, ecc."
+  },
+  "filters": {
+    "all_categories": "Tutte le categorie",
+    "all_items": "Tutti gli oggetti",
+    "all_quantities": "Tutte le quantità",
+    "all_locations": "Tutte le posizioni",
+    "category": "Categoria",
+    "location": "Posizione",
+    "clear_all_filters": "Cancella tutti i filtri",
+    "expired": "Scaduti",
+    "expiring_soon": "In scadenza",
+    "expiry": "Scadenza",
+    "filters": "Filtri",
+    "future": "Futuro",
+    "hide_filters": "Nascondi filtri",
+    "no_expiry": "Senza scadenza",
+    "non_zero": "Maggiore di zero",
+    "quantity": "Quantità",
+    "search_placeholder": "Cerca oggetti...",
+    "zero": "Zero"
+  },
+  "sort": {
+    "category": "Categoria",
+    "location": "Posizione",
+    "expiry_date": "Data di scadenza",
+    "name": "Nome",
+    "quantity_high": "Quantità (Alta)",
+    "quantity_low": "Quantità (Bassa)",
+    "sort_by": "Ordina per:",
+    "zero_last": "Zero per ultimo"
+  },
+  "active_filters": {
+    "category": "Categoria",
+    "location": "Posizione",
+    "expiry": "Scadenza",
+    "label": "Filtri attivi:",
+    "quantity": "Quantità",
+    "search": "Ricerca"
+  },
+  "config": {
+    "inventory_entity_required": "Entità inventario (Obbligatoria)",
+    "items_count": "Oggetti",
+    "select_entity_message": "Seleziona un’entità inventario sopra",
+    "selected_inventory": "Inventario selezionato:"
+  },
+  "actions": {
+    "confirm_remove": "Rimuovere {name} dall’inventario?"
+  },
+  "errors": {
+    "clear_filters_error": "Errore nella cancellazione dei filtri. Riprova."
+  }
+}

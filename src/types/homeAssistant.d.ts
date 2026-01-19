@@ -158,7 +158,14 @@ export interface InventoryItem {
   unit: string;
 }
 
+export interface ItemClickActionConfig {
+  service?: string | undefined;
+  data?: Record<string, any> | undefined;
+  target?: HassServiceTarget | undefined;
+}
+
 export interface InventoryConfig extends LovelaceCardConfig {
   type: string;
   entity: string;
+  item_click_action?: ItemClickActionConfig;
 }

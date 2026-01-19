@@ -32,6 +32,74 @@ export function createEntitySelector(
   `;
 }
 
+export function createItemClickActionEditor(
+  actionService: string,
+  actionTargetJson: string,
+  actionDataJson: string,
+  onValueChanged: (event_: Event) => void,
+  translations: TranslationData,
+): TemplateResult {
+  return html`
+    <div class="option">
+      <div class="section-title">
+        ${TranslationManager.localize(
+          translations,
+          'config.item_click_action',
+          undefined,
+          'Item click action (optional)',
+        )}
+      </div>
+      <div class="row">
+        <div class="col">
+          <ha-textfield
+            .label=${TranslationManager.localize(
+              translations,
+              'config.item_click_service',
+              undefined,
+              'Service (domain.service)',
+            )}
+            .value=${actionService}
+            data-field="item_click_service"
+            @change=${onValueChanged}
+          ></ha-textfield>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ha-textarea
+            .label=${TranslationManager.localize(
+              translations,
+              'config.item_click_target',
+              undefined,
+              'Target JSON (optional)',
+            )}
+            .value=${actionTargetJson}
+            placeholder='{"entity_id":"automation.example"}'
+            data-field="item_click_target"
+            @change=${onValueChanged}
+          ></ha-textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ha-textarea
+            .label=${TranslationManager.localize(
+              translations,
+              'config.item_click_data',
+              undefined,
+              'Data JSON (optional, supports {{location}}, {{name}}, {{quantity}})',
+            )}
+            .value=${actionDataJson}
+            placeholder='{"variables":{"location":"{{location}}","name":"{{name}}"}}'
+            data-field="item_click_data"
+            @change=${onValueChanged}
+          ></ha-textarea>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 export function createEntityInfo(
   hass: HomeAssistant,
   entityId: string,
