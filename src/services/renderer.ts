@@ -18,6 +18,7 @@ export class Renderer {
     sortMethod: string,
     todoLists: TodoList[],
     translations: TranslationData,
+    minimal = false,
   ): void {
     const inventoryName = Utilities.getInventoryName(state, entityId);
     const description = Utilities.getInventoryDescription(state);
@@ -44,6 +45,7 @@ export class Renderer {
       allItems,
       description,
       translations,
+      minimal,
     );
   }
 

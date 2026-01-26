@@ -3,7 +3,6 @@ import { createInventoryHeader } from '../templates/inventoryHeader';
 import { createSearchAndFilters } from '../templates/searchAndFilters';
 import { createAddModal, createEditModal } from '../templates/modalTemplates';
 import { createItemsList } from '../templates/itemList';
-import { createSortOptions } from '../templates/sortOptions';
 import { createActiveFiltersDisplay } from '../templates/filters';
 import { InventoryItem } from '../types/homeAssistant';
 import { FilterState } from '../types/filterState';
@@ -23,6 +22,7 @@ export function generateCardHTML(
   allItems: readonly InventoryItem[],
   description: string | undefined,
   translations: TranslationData,
+  minimal = false,
 ): string {
   return `
     <style>${styles}</style>
@@ -30,9 +30,6 @@ export function generateCardHTML(
       ${createInventoryHeader(inventoryName, allItems as InventoryItem[], translations, description)}
 
       <div class="controls-row">
-        <div class="sorting-controls">
-          ${createSortOptions(sortMethod, translations)}
-        </div>
         <button id="${ELEMENTS.OPEN_ADD_MODAL}" class="add-new-btn">
           + ${TranslationManager.localize(translations, 'modal.add_item', undefined, 'Add Item')}
         </button>
@@ -47,7 +44,7 @@ export function generateCardHTML(
       <div class="items-container">
         ${
           items.length > 0
-            ? createItemsList(items, sortMethod, todoLists, translations)
+            ? createItemsList(items, sortMethod, todoLists, translations, minimal)
             : `<div class="empty-state">${TranslationManager.localize(translations, 'items.no_items', undefined, 'No items in inventory')}</div>`
         }
       </div>

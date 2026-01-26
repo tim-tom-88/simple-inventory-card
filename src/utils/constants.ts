@@ -145,7 +145,7 @@ export const STORAGE_KEYS = {
 };
 
 export const TIMING = {
-  SEARCH_DEBOUNCE: 300,
+  SEARCH_DEBOUNCE: 150,
   MODAL_FOCUS_DELAY: 100,
   ADD_ITEM_DELAY: 10,
 };

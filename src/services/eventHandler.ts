@@ -68,10 +68,7 @@ export class EventHandler {
     this.filters.setupSearchInput(this.config.entity, () => this.handleSearchChange());
     this.eventListenersSetup = true;
 
-    const filters = this.filters.getCurrentFilters(this.config.entity);
-    if (filters.showAdvanced) {
-      this.initializeMultiSelects();
-    }
+    this.initializeMultiSelects();
   }
 
   cleanupEventListeners(): void {
@@ -177,14 +174,6 @@ export class EventHandler {
   private handleChange(event: Event): void {
     const target = event.target as HTMLElement;
 
-    if (target.id === ELEMENTS.SORT_METHOD) {
-      const filters = this.filters.getCurrentFilters(this.config.entity);
-      filters.sortMethod = (target as HTMLSelectElement).value;
-      this.filters.saveFilters(this.config.entity, filters);
-      this.renderCallback();
-      return;
-    }
-
     if (
       target instanceof HTMLInputElement &&
       target.type === 'checkbox' &&
@@ -197,22 +186,6 @@ export class EventHandler {
         }
       }, 0);
     }
-
-    if (target.id === ELEMENTS.SEARCH_INPUT && target instanceof HTMLInputElement) {
-      const filters = this.filters.getCurrentFilters(this.config.entity);
-      filters.searchText = target.value;
-      this.filters.saveFilters(this.config.entity, filters);
-
-      const state = this.hass.states[this.config.entity];
-      if (state) {
-        const allItems = Utilities.validateInventoryItems(state.attributes?.items || []);
-        const filteredItems = this.filters.filterItems(allItems, filters);
-        const sortedItems = this.filters.sortItems(filteredItems, 'name', this.translations);
-        this.updateItemsCallback(sortedItems, 'name');
-        this.filters.updateFilterIndicators(filters, this.translations);
-      }
-      return;
-    }
   }
 
   private handleSearchChange(): void {
@@ -220,10 +193,7 @@ export class EventHandler {
     if (!state) return;
 
     const filters = this.filters.getCurrentFilters(this.config.entity);
-    const sortMethodElement = this.renderRoot.querySelector(
-      ELEMENTS.SORT_METHOD,
-    ) as HTMLSelectElement | null;
-    const sortMethod = sortMethodElement?.value || DEFAULTS.SORT_METHOD;
+    const sortMethod = this.config.sort_method || filters.sortMethod || DEFAULTS.SORT_METHOD;
 
     const allItems = Utilities.validateInventoryItems(state.attributes?.items || []);
     const filteredItems = this.filters.filterItems(allItems, filters);
@@ -380,9 +350,7 @@ export class EventHandler {
       const filters = this.filters.getCurrentFilters(this.config.entity);
       setTimeout(() => {
         this.filters.updateFilterIndicators(filters, this.translations);
-        if (filters.showAdvanced) {
-          this.initializeMultiSelects();
-        }
+        this.initializeMultiSelects();
       }, 50);
     } catch (error) {
       console.error('Error clearing filters:', error);
@@ -554,10 +522,7 @@ export class EventHandler {
     if (!state) return;
 
     const filters = this.filters.getCurrentFilters(this.config.entity);
-    const sortMethodElement = this.renderRoot.querySelector(
-      `#${ELEMENTS.SORT_METHOD}`,
-    ) as HTMLSelectElement | null;
-    const sortMethod = sortMethodElement?.value || filters.sortMethod || DEFAULTS.SORT_METHOD;
+    const sortMethod = this.config.sort_method || filters.sortMethod || DEFAULTS.SORT_METHOD;
 
     const allItems = Utilities.validateInventoryItems(state.attributes?.items || []);
     const filteredItems = this.filters.filterItems(allItems, filters);

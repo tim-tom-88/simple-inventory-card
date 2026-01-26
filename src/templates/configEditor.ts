@@ -32,6 +32,35 @@ export function createEntitySelector(
   `;
 }
 
+export function createSortMethodSelector(
+  hass: HomeAssistant,
+  sortOptions: Array<{ value: string; label: string }>,
+  selectedSort: string,
+  onValueChanged: (event_: CustomEvent) => void,
+  translations: TranslationData,
+): TemplateResult {
+  return html`
+    <div class="option">
+      <div class="row">
+        <div class="col">
+          <ha-combo-box
+            .hass=${hass}
+            .label=${TranslationManager.localize(
+              translations,
+              'sort.sort_by',
+              undefined,
+              'Sort by',
+            )}
+            .items=${sortOptions}
+            .value=${selectedSort}
+            @value-changed=${onValueChanged}
+          ></ha-combo-box>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 export function createItemClickActionEditor(
   actionService: string,
   actionTargetJson: string,

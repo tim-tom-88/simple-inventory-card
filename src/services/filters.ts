@@ -1,4 +1,4 @@
-import { FILTER_VALUES, STORAGE_KEYS, ELEMENTS, SORT_METHODS } from '../utils/constants';
+import { FILTER_VALUES, STORAGE_KEYS, ELEMENTS, SORT_METHODS, TIMING } from '../utils/constants';
 import { InventoryItem } from '../types/homeAssistant';
 import { Utilities } from '../utils/utilities';
 import { DEFAULTS } from '../utils/constants';
@@ -359,7 +359,7 @@ export class Filters {
           filters.searchText = value;
           this.saveFilters(entityId, filters);
           onFilterChange();
-        }, 300);
+        }, TIMING.SEARCH_DEBOUNCE);
       };
 
       searchInput.addEventListener('input', this.boundSearchHandler);
@@ -371,6 +371,13 @@ export class Filters {
     const advancedToggle = this.shadowRoot.getElementById(
       ELEMENTS.ADVANCED_SEARCH_TOGGLE,
     ) as HTMLElement | null;
+    const clearButton = this.shadowRoot.getElementById(
+      ELEMENTS.CLEAR_FILTERS,
+    ) as HTMLElement | null;
+
+    if (clearButton) {
+      clearButton.classList.toggle('has-active-filters', Utilities.hasActiveFilters(filters));
+    }
 
     if (advancedToggle) {
       if (Utilities.hasActiveFilters(filters)) {

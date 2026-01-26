@@ -24,27 +24,11 @@ function advancedFilters(
   translations: TranslationData,
 ): string {
   return `
-    <div id="advanced-filters" class="advanced-filters" style="display: ${filters.showAdvanced ? 'block' : 'none'}">
+    <div id="advanced-filters" class="advanced-filters">
       ${categoryFilters(filters, categories, translations)}
       ${locationFilters(filters, locations, translations)}
       ${quantityFilters(filters, translations)}
       ${expiryFilters(filters, translations)}
-      ${clearFiltersButton(translations)}
-    </div>
-`;
-}
-
-function clearFiltersButton(translations: TranslationData): string {
-  return `
-    <div class="filter-actions">
-      <button id="${ELEMENTS.CLEAR_FILTERS}" class="clear-only-btn">
-        ${TranslationManager.localize(
-          translations,
-          'filters.clear_all_filters',
-          undefined,
-          'Clear All Filters',
-        )}
-      </button>
     </div>
 `;
 }
@@ -199,18 +183,14 @@ function searchRow(filters: FilterState, translations: TranslationData): string 
         value="${filters.searchText || ''}"
         class="search-input ${filters.searchText ? 'has-value' : ''}"
       />
-      <button id="${ELEMENTS.ADVANCED_SEARCH_TOGGLE}" 
-        class="toggle-btn ${Utilities.hasActiveFilters(filters) ? 'has-active-filters' : ''}">
-      ${
-        filters.showAdvanced
-          ? TranslationManager.localize(
-              translations,
-              'filters.hide_filters',
-              undefined,
-              'Hide Filters',
-            )
-          : TranslationManager.localize(translations, 'filters.filters', undefined, 'Filters')
-      }
+      <button id="${ELEMENTS.CLEAR_FILTERS}" 
+        class="clear-only-btn ${Utilities.hasActiveFilters(filters) ? 'has-active-filters' : ''}">
+        ${TranslationManager.localize(
+          translations,
+          'filters.clear_all_filters',
+          undefined,
+          'Clear Filters',
+        )}
       </button>
     </div>
 `;

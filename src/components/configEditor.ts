@@ -6,10 +6,12 @@ import {
   createEntityInfo,
   createNoEntityMessage,
   createItemClickActionEditor,
+  createSortMethodSelector,
 } from '../templates/configEditor';
 import { configEditorStyles } from '../styles/configEditor';
 import { TranslationData } from '@/types/translatableComponent';
 import { TranslationManager } from '@/services/translationManager';
+import { DEFAULTS, SORT_METHODS } from '@/utils/constants';
 
 class ConfigEditor extends LitElement {
   public hass?: HomeAssistant;
@@ -18,7 +20,7 @@ class ConfigEditor extends LitElement {
 
   constructor() {
     super();
-    this._config = { entity: '', type: '' };
+    this._config = { entity: '', type: '', sort_method: DEFAULTS.SORT_METHOD };
   }
 
   static get properties() {
@@ -57,7 +59,7 @@ class ConfigEditor extends LitElement {
   }
 
   setConfig(config: InventoryConfig): void {
-    this._config = { ...config };
+    this._config = { ...config, sort_method: config.sort_method || DEFAULTS.SORT_METHOD };
   }
 
   get _entity(): string {
@@ -77,6 +79,8 @@ class ConfigEditor extends LitElement {
     }
     const inventoryEntities = Utilities.findInventoryEntities(this.hass);
     const entityOptions = Utilities.createEntityOptions(this.hass, inventoryEntities);
+    const sortOptions = this._createSortOptions();
+    const selectedSort = this._config.sort_method || DEFAULTS.SORT_METHOD;
 
     if (!this._config.entity && inventoryEntities.length > 0) {
       if (!this._config.type) {
@@ -100,6 +104,13 @@ class ConfigEditor extends LitElement {
           entityOptions,
           this._entity,
           this._valueChanged.bind(this),
+          this._translations,
+        )}
+        ${createSortMethodSelector(
+          this.hass,
+          sortOptions,
+          selectedSort,
+          this._sortMethodChanged.bind(this),
           this._translations,
         )}
         ${createItemClickActionEditor(
@@ -132,6 +143,7 @@ class ConfigEditor extends LitElement {
     const config: InventoryConfig = {
       ...this._config,
       entity: value,
+      sort_method: this._config.sort_method || DEFAULTS.SORT_METHOD,
       type: this._config.type || 'custom:simple-inventory-card',
     };
 
@@ -200,6 +212,7 @@ class ConfigEditor extends LitElement {
     const config: InventoryConfig = {
       ...this._config,
       ...(hasActionValues ? { item_click_action: nextAction } : {}),
+      sort_method: this._config.sort_method || DEFAULTS.SORT_METHOD,
       type: this._config.type || 'custom:simple-inventory-card',
     };
 
@@ -231,6 +244,7 @@ class ConfigEditor extends LitElement {
     const config: InventoryConfig = {
       ...this._config,
       ...(parsed ? { item_click_action: parsed } : {}),
+      sort_method: this._config.sort_method || DEFAULTS.SORT_METHOD,
       type: this._config.type || 'custom:simple-inventory-card',
     };
 
@@ -287,6 +301,97 @@ class ConfigEditor extends LitElement {
     }
 
     return this._parseJsonInput(value);
+  }
+
+  private _sortMethodChanged(event_: CustomEvent): void {
+    if (!this._config) {
+      return;
+    }
+
+    const value = (event_.detail?.value as string | undefined) || DEFAULTS.SORT_METHOD;
+    if (this._config.sort_method === value) {
+      return;
+    }
+
+    const config: InventoryConfig = {
+      ...this._config,
+      sort_method: value || DEFAULTS.SORT_METHOD,
+      type: this._config.type || 'custom:simple-inventory-card',
+    };
+
+    this._config = config;
+    this.requestUpdate();
+
+    this.dispatchEvent(
+      new CustomEvent('config-changed', {
+        detail: { config: config },
+        bubbles: true,
+        composed: true,
+      }),
+    );
+  }
+
+  private _createSortOptions(): Array<{ value: string; label: string }> {
+    return [
+      {
+        value: SORT_METHODS.NAME,
+        label: TranslationManager.localize(this._translations, 'sort.name', undefined, 'Name'),
+      },
+      {
+        value: SORT_METHODS.CATEGORY,
+        label: TranslationManager.localize(
+          this._translations,
+          'sort.category',
+          undefined,
+          'Category',
+        ),
+      },
+      {
+        value: SORT_METHODS.LOCATION,
+        label: TranslationManager.localize(
+          this._translations,
+          'sort.location',
+          undefined,
+          'Location',
+        ),
+      },
+      {
+        value: SORT_METHODS.QUANTITY,
+        label: TranslationManager.localize(
+          this._translations,
+          'sort.quantity_high',
+          undefined,
+          'Quantity (High)',
+        ),
+      },
+      {
+        value: SORT_METHODS.QUANTITY_LOW,
+        label: TranslationManager.localize(
+          this._translations,
+          'sort.quantity_low',
+          undefined,
+          'Quantity (Low)',
+        ),
+      },
+      {
+        value: SORT_METHODS.EXPIRY,
+        label: TranslationManager.localize(
+          this._translations,
+          'sort.expiry_date',
+          undefined,
+          'Expiry Date',
+        ),
+      },
+      {
+        value: SORT_METHODS.ZERO_LAST,
+        label: TranslationManager.localize(
+          this._translations,
+          'sort.zero_last',
+          undefined,
+          'Zero Last',
+        ),
+      },
+    ];
   }
 
   private _stringifyJson(value?: Record<string, any>): string {

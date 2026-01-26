@@ -46,13 +46,13 @@ export const itemRowStyles: CSSResult = css`
   }
 
   .location {
-    font-size: 0.9em;
+    font-size: 1em;
     font-style: italic;
     opacity: 0.7;
   }
 
   .location-category {
-    font-size: 0.9em;
+    font-size: 1em;
     font-style: italic;
     opacity: 0.7;
   }

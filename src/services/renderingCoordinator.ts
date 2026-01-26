@@ -57,7 +57,8 @@ export class RenderingCoordinator {
       const { filters, renderer, eventHandler, state: stateService } = services;
 
       const currentFilters = filters.getCurrentFilters(entityId);
-      const sortMethod = currentFilters.sortMethod || DEFAULTS.SORT_METHOD;
+      const sortMethod = config.sort_method || currentFilters.sortMethod || DEFAULTS.SORT_METHOD;
+      const minimal = !!config.minimal;
       const allItems = validateItemsCallback(state.attributes?.items || []);
       const filteredItems = filters.filterItems(allItems, currentFilters);
       const sortedItems = filters.sortItems(filteredItems, sortMethod, translations);
@@ -70,6 +71,7 @@ export class RenderingCoordinator {
         sortMethod,
         todoLists,
         translations,
+        minimal,
       );
 
       eventHandler.setupEventListeners();
@@ -93,6 +95,7 @@ export class RenderingCoordinator {
     sortMethod: string,
     todoLists: Array<{ id: string; name: string }>,
     translations: TranslationData,
+    minimal = false,
   ): void {
     if (!this.renderRoot) {
       return;
@@ -110,6 +113,7 @@ export class RenderingCoordinator {
           sortMethod,
           todoLists,
           translations || {},
+          minimal,
         );
       })
       .catch((error) => {

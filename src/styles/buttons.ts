@@ -129,6 +129,29 @@ export const buttonStyles: CSSResult = css`
     border: 2px solid var(--card-background-color, white);
   }
 
+  .clear-only-btn {
+    padding: 12px 16px;
+    background: var(--secondary-background-color, #f0f0f0);
+    color: var(--primary-text-color);
+    border: 1px solid var(--divider-color, #e0e0e0);
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .clear-only-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .clear-only-btn.has-active-filters {
+    background: var(--warning-color, #ff9800);
+    color: var(--text-primary-color, white);
+    border-color: var(--warning-color, #ff9800);
+  }
+
   .cancel-btn {
     background: var(--secondary-background-color, #f0f0f0);
     color: var(--primary-text-color);
