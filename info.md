@@ -7,9 +7,10 @@ This card requires the Simple Inventory integration to be installed:
 
 ## Installation
 
-1. Install via HACS or manually copy `simple-inventory-card.js` to `/config/www/`
+1. Install via HACS or manually copy `simple-inventory-card-custom.js` to `/config/www/`
 2. Add the resource in Lovelace
 
 ## Configuration
 
-Add a card with type: `simple-inventory-card`
+Add a card with type: `simple-inventory-card-custom`
+

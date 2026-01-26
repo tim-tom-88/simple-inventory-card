@@ -84,7 +84,7 @@ class ConfigEditor extends LitElement {
 
     if (!this._config.entity && inventoryEntities.length > 0) {
       if (!this._config.type) {
-        this._config.type = 'custom:simple-inventory-card';
+        this._config.type = 'custom:simple-inventory-card-custom';
       }
 
       this._config.entity = inventoryEntities[0];
@@ -144,7 +144,7 @@ class ConfigEditor extends LitElement {
       ...this._config,
       entity: value,
       sort_method: this._config.sort_method || DEFAULTS.SORT_METHOD,
-      type: this._config.type || 'custom:simple-inventory-card',
+      type: this._config.type || 'custom:simple-inventory-card-custom',
     };
 
     this._config = config;
@@ -213,7 +213,7 @@ class ConfigEditor extends LitElement {
       ...this._config,
       ...(hasActionValues ? { item_click_action: nextAction } : {}),
       sort_method: this._config.sort_method || DEFAULTS.SORT_METHOD,
-      type: this._config.type || 'custom:simple-inventory-card',
+      type: this._config.type || 'custom:simple-inventory-card-custom',
     };
 
     this._config = config;
@@ -245,7 +245,7 @@ class ConfigEditor extends LitElement {
       ...this._config,
       ...(parsed ? { item_click_action: parsed } : {}),
       sort_method: this._config.sort_method || DEFAULTS.SORT_METHOD,
-      type: this._config.type || 'custom:simple-inventory-card',
+      type: this._config.type || 'custom:simple-inventory-card-custom',
     };
 
     if (!parsed && this._config.item_click_action) {
@@ -316,7 +316,7 @@ class ConfigEditor extends LitElement {
     const config: InventoryConfig = {
       ...this._config,
       sort_method: value || DEFAULTS.SORT_METHOD,
-      type: this._config.type || 'custom:simple-inventory-card',
+      type: this._config.type || 'custom:simple-inventory-card-custom',
     };
 
     this._config = config;

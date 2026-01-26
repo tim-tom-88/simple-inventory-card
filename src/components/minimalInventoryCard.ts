@@ -10,7 +10,7 @@ class MinimalInventoryCard extends SimpleInventoryCard {
     const nextConfig: InventoryConfig = {
       ...config,
       minimal: true,
-      type: config.type || 'custom:simple-inventory-card-minimal',
+      type: config.type || 'custom:simple-inventory-card-custom-minimal',
     };
 
     super.setConfig(nextConfig);
@@ -19,21 +19,21 @@ class MinimalInventoryCard extends SimpleInventoryCard {
 
 export { MinimalInventoryCard };
 
-if (!customElements.get('simple-inventory-card-minimal')) {
-  customElements.define('simple-inventory-card-minimal', MinimalInventoryCard);
+if (!customElements.get('simple-inventory-card-custom-minimal')) {
+  customElements.define('simple-inventory-card-custom-minimal', MinimalInventoryCard);
 }
 
 window.customCards = window.customCards || [];
 const minimalCardConfig = {
-  type: 'simple-inventory-card-minimal',
+  type: 'simple-inventory-card-custom-minimal',
   name: 'Simple Inventory Card Minimal',
   description: minimalCardDescription,
   preview: true,
-  documentationURL: 'https://github.com/blaineventurine/simple-inventory-card',
+  documentationURL: 'https://github.com/blaineventurine/simple-inventory-card-custom',
 };
 
 const existingMinimalCard = window.customCards.find(
-  (card) => card.type === 'simple-inventory-card-minimal',
+  (card) => card.type === 'simple-inventory-card-custom-minimal',
 );
 if (!existingMinimalCard) {
   window.customCards.push(minimalCardConfig);

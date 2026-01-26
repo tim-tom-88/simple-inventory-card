@@ -10,16 +10,16 @@ export default defineConfig({
       targets: [
         {
           src: 'src/translations/*.json',
-          dest: 'translations'
-        }
-      ]
-    })
+          dest: 'translations',
+        },
+      ],
+    }),
   ],
   build: {
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),
       name: 'SimpleInventoryCard',
-      fileName: 'simple-inventory-card',
+      fileName: 'simple-inventory-card-custom',
       formats: ['es'],
     },
     rollupOptions: {
@@ -29,7 +29,7 @@ export default defineConfig({
         globals: {
           lit: 'Lit',
         },
-        entryFileNames: 'simple-inventory-card.js',
+        entryFileNames: 'simple-inventory-card-custom.js',
       },
     },
     minify: 'terser',

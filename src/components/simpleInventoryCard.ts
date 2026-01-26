@@ -194,7 +194,7 @@ async function loadCardDescription(): Promise<void> {
       cardDescription = translatedDescription;
 
       const existingCard = window.customCards?.find(
-        (card) => card.type === 'simple-inventory-card',
+        (card) => card.type === 'simple-inventory-card-custom',
       );
       if (existingCard) {
         existingCard.description = cardDescription;
@@ -209,8 +209,8 @@ loadCardDescription();
 
 export { SimpleInventoryCard };
 
-if (!customElements.get('simple-inventory-card')) {
-  customElements.define('simple-inventory-card', SimpleInventoryCard);
+if (!customElements.get('simple-inventory-card-custom')) {
+  customElements.define('simple-inventory-card-custom', SimpleInventoryCard);
 }
 
 if (!customElements.get('simple-inventory-config-editor')) {
@@ -220,14 +220,16 @@ if (!customElements.get('simple-inventory-config-editor')) {
 
 window.customCards = window.customCards || [];
 const cardConfig = {
-  type: 'simple-inventory-card',
+  type: 'simple-inventory-card-custom',
   name: 'Simple Inventory Card',
   description: cardDescription,
   preview: true,
-  documentationURL: 'https://github.com/blaineventurine/simple-inventory-card',
+  documentationURL: 'https://github.com/blaineventurine/simple-inventory-card-custom',
 };
 
-const existingCard = window.customCards.find((card) => card.type === 'simple-inventory-card');
+const existingCard = window.customCards.find(
+  (card) => card.type === 'simple-inventory-card-custom',
+);
 if (!existingCard) {
   window.customCards.push(cardConfig);
 }

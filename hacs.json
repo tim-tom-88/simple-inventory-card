@@ -1,6 +1,7 @@
 {
-  "name": "Simple Inventory Card",
+  "name": "Simple Inventory Card Custom",
   "render_readme": true,
-  "filename": "simple-inventory-card.js",
+  "filename": "simple-inventory-card-custom.js",
   "content_in_root": false
 }
+

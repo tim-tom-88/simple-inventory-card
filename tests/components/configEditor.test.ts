@@ -136,7 +136,7 @@ describe('ConfigEditor', () => {
       vi.mocked(Utilities.findInventoryEntities).mockReturnValue(mockEntities);
 
       configEditor['_config'] = {
-        type: 'custom:simple-inventory-card',
+        type: 'custom:simple-inventory-card-custom',
         entity: '',
       };
 
@@ -148,7 +148,7 @@ describe('ConfigEditor', () => {
           type: 'config-changed',
           detail: {
             config: {
-              type: 'custom:simple-inventory-card',
+              type: 'custom:simple-inventory-card-custom',
               entity: 'sensor.inventory1',
             },
           },
@@ -161,7 +161,7 @@ describe('ConfigEditor', () => {
       vi.mocked(Utilities.findInventoryEntities).mockReturnValue(mockEntities);
 
       configEditor['_config'] = {
-        type: 'custom:simple-inventory-card',
+        type: 'custom:simple-inventory-card-custom',
         entity: 'sensor.existing',
       };
 
@@ -265,7 +265,7 @@ describe('ConfigEditor', () => {
 
     it('should update internal config and call requestUpdate when value changes', () => {
       configEditor['_config'] = {
-        type: 'custom:simple-inventory-card',
+        type: 'custom:simple-inventory-card-custom',
         entity: 'sensor.old_entity',
       };
 
@@ -282,7 +282,7 @@ describe('ConfigEditor', () => {
           type: 'config-changed',
           detail: {
             config: {
-              type: 'custom:simple-inventory-card',
+              type: 'custom:simple-inventory-card-custom',
               entity: 'sensor.new_entity',
             },
           },
@@ -306,7 +306,7 @@ describe('ConfigEditor', () => {
         expect.objectContaining({
           detail: {
             config: expect.objectContaining({
-              type: 'custom:simple-inventory-card',
+              type: 'custom:simple-inventory-card-custom',
               entity: 'sensor.new_entity',
             }),
           },

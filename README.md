@@ -4,7 +4,7 @@
 
 To use, install the [Simple Inventory](https://github.com/blaineventurine/simple_inventory) integration first.
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=blaineventurine&repository=simple-inventory-card&category=Dashboard)
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=blaineventurine&repository=simple-inventory-card-custom&category=Dashboard)
 
 This card allows you to track various items in different inventories, and automatically add an item to a specific to-do list when it is below a certain threshold.
 
@@ -15,3 +15,4 @@ You can set an expiration date for an item, how far ahead you want to be warned,
 <img width="539" height="258" alt="image" src="https://github.com/user-attachments/assets/9d43c244-1cd9-47f3-8c35-7ac1eb040ff6" />
 
 (the description will not sync with the built-in Home Assistant `todo.shopping_list`, but any other list you create will work)
+
