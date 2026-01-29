@@ -3440,7 +3440,7 @@ const Be = a`
     gap: 12px;
     align-items: center;
     margin-bottom: 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .search-row input {
